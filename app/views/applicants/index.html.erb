@@ -1,0 +1,12 @@
+<%= render partial: "shared/navbarrenter" %>
+
+<h1>products</h1>
+<ul>
+  <% @applicants.each do |applicant| %>
+    <li>   
+        <%= applicant.status %>
+    </li>
+    <li><%= link_to "View Product", show_path(applicant.product_id) %></li>
+    <%= button_to "Delete", delete_path(applicant), method: :delete %>
+  <% end %>
+</ul>

@@ -1,0 +1,29 @@
+<%= render partial: "shared/navbar" %>
+
+<h1>Add New Product</h1>
+
+<%= form_with model: @product do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :rent %><br>
+    <%= form.text_field :rent %>
+  </div>
+
+    <div>
+    <%= form.label "Product Image" %><br>
+    <%= form.file_field :image %>
+  </div>
+
+  <div>
+  <%= form.label :status %><br>
+  <%= form.select :status, ['Available', 'Unavailable'], selected: 'Available' %>
+</div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

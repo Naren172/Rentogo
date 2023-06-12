@@ -1,0 +1,21 @@
+<%= render partial: "shared/navbar" %>
+
+
+
+<h1>Applicants</h1>
+
+<ul>
+  <% @renter.each do |renter| %>
+    <li>
+        <%= renter.name%>
+    </li>
+    <%= link_to "View Profile", view_profile_path(renter) %>
+    <%= link_to "Accept", accept_path(renter) %>    
+    <%= link_to "Reject", reject_path(renter) %>
+
+
+
+
+  <% end %>
+</ul>
+

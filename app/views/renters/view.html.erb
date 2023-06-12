@@ -1,0 +1,12 @@
+<%= render partial: "shared/navbar" %>
+
+<h1><%= @renter.name %></h1>
+<h1>Rating:<%= @averagerating%></h1>
+<ul>
+  <% @ratings.each do |rating| %>
+   <%= rating.rating%><br>
+   <%=rating.comment%>
+  <% end %>
+</ul>
+
+</ul>

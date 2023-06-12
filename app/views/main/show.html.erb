@@ -1,0 +1,17 @@
+<%= render partial: "shared/navbarrenter" %>
+
+<h1><%= @product.name %></h1>
+
+<p><%= @product.rent %></p>
+<p><%= @product.status %></p>
+
+    <image src="<%=(url_for(@product.image))%>">
+
+<h1>Rating:<%= @averagerating%></h1>
+<ul>
+  <% @ratings.each do |rating| %>
+   <%= rating.rating%><br>
+   <%=rating.comment%>
+  <% end %>
+</ul>
+<li><%= link_to "Add", apply_path(@product.id) %></li>

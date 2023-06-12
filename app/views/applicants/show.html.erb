@@ -1,0 +1,9 @@
+<%= render partial: "shared/navbar" %>
+
+<h1><%= @product.name %></h1>
+
+<p><%= @product.rent %></p>
+<p><%= @product.status %></p>
+
+    <image src="<%=(url_for(@product.image))%>">
+   

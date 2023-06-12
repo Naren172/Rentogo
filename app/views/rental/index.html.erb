@@ -1,0 +1,14 @@
+<%= render partial: "shared/navbarrenter" %>
+
+<h1>products</h1>
+
+<ul>
+  <% @products.each do |product| %>
+    <li>
+      
+        <%= product.name %>
+        <%= product.rent%>
+      </a>
+    </li>
+  <% end %>
+</ul>
