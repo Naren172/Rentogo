@@ -1,4 +1,9 @@
-<%= render partial: "shared/navbarrenter" %>
+ <%= render partial: "shared/navbarrenter" %>
+
+
+
+<%
+=begin%>
 
 <h1><%= @product.name %></h1>
 
@@ -11,7 +16,48 @@
 <ul>
   <% @ratings.each do |rating| %>
    <%= rating.rating%><br>
-   <%=rating.comment%>
+   <%=rating.comment%><br>
+   <br>
   <% end %>
 </ul>
-<li><%= link_to "Add", apply_path(@product.id) %></li>
+<li><%= link_to "Add", apply_path(@product.id) %></li> 
+<%
+=end%>
+
+
+
+
+<div class="container">
+           
+
+            <div class="row">
+             <div class="card">
+              <div class="card-body"> 
+              <div class="col-md-6" style="top:20%;">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel"> 
+                    <center> 
+                      <div class="item active">
+                        <img src="<%=(url_for(@product.image))%>" alt="Los Angeles" style="width:50%;height:50%;">
+                      </div>
+                    </center>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <center><h1 style="font-size: 18px;">AMOUNT:RS <%=@product.rent%></h1></center>
+                <br>
+                <h1 style="font-size: 18px;">Details</h1>
+                <p><%=@product.name%></p>
+                  <h1 style="font-size: 18px; border-style: solid;padding: .3cm;">The amount can be paid either through cash or using UPI in the time of delivery</h1>
+                  <p>Ratting:<%=@averagerating%></p>
+                  <ul>
+                    <% @ratings.each do |rating| %>
+                    <%= rating.rating%><br>
+                    <%=rating.comment%><br>
+                    <br>
+                    <% end %>
+                  </ul>
+
+              </div>
+
+            </div>
+            </div>

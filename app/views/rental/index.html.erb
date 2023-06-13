@@ -3,11 +3,18 @@
 <h1>products</h1>
 
 <ul>
-  <% @products.each do |product| %>
+  <% @products.each do |product| %> 
     <li>
       
         <%= product.name %>
         <%= product.rent%>
+        <%= button_to "Buy", payment_path(product)%>
+        <%= link_to "Add Reviews", rating_path(product)%>
+        <%
+=begin%>
+ <%= button_to "Buy", checkout_create_path,params: {id:product.id},  remote: true%> 
+<%
+=end%>
       </a>
     </li>
   <% end %>

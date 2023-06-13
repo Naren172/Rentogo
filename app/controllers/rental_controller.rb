@@ -20,8 +20,6 @@ class RentalController < ApplicationController
         @rentals.each do |rental|
             @products<<Product.find(rental.product_id)
         end
-
-
     end
-  
+
 end

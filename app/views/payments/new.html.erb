@@ -1,0 +1,15 @@
+<%= render partial: "shared/navbar" %>
+
+<h1>Add New Product</h1>
+
+<%= form_with model: @payment,url: payment_path do |form| %>
+
+  <div>
+  <%= form.label :paymentmethod %><br>
+  <%= form.select :paymentmethod, ['card', 'cash'], selected: 'card' %>
+</div>
+
+  <div>
+    <%= form.submit "Pay"%>
+  </div>
+<% end %>

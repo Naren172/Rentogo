@@ -12,4 +12,8 @@ class SessionController < ApplicationController
             render :new
         end
     end
+
+
+
+    
 end
