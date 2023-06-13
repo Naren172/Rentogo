@@ -21,5 +21,8 @@ class RentalController < ApplicationController
             @products<<Product.find(rental.product_id)
         end
     end
+    def producthistory
+        @product=Product.find(params)
+    end
 
 end

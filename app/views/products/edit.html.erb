@@ -1,4 +1,6 @@
-  <%= render partial: "shared/navbar" %>
+  <%
+=begin%>
+ <%= render partial: "shared/navbar" %>
 
 <h1>Edit Product</h1>
 
@@ -21,4 +23,53 @@
   <div>
     <%= form.submit %>
   </div>
-<% end %>
+<% end %> 
+<%
+=end%>
+
+<%= render partial: "shared/navbar" %>
+
+<div class="container" >
+            <div class="row">
+              <div class="col-sm-4" style="background-color: #FF5733 ; height: 15.3cm;">
+                <br><br><br>
+                <h1 style="color: white;">Welcome To</h1>
+                <div class="logo" style="color: white;">REN<span style="color: greenyellow;">T</span>OGO</div>
+                </h1><br><br>
+                <h4 style="color: #E5E4E2;">Rentogo Is Your Ticket To A Better Lifestyle.</h4>
+                <br><br>
+                <h5 style="color: #E5E4E2;">Safety precautions during COVID-19. We’re taking additional steps and precautionary measures to protect our community from COVID-19.  
+                  </h5>
+                  <br><br><br>
+                  
+              
+              </div>
+              <div class="col-sm-8" style="background-color: white;height: 15.3cm;">
+                <%= form_with model: @product do |form| %>
+                    <center> <h1 style="color: #581845;">Want To Give For Rent</h1></center>
+
+                    <div>
+                      <%= form.label :name %><br>
+                      <%= form.text_field :name %>
+                    </div>
+                      <br><br>
+                    <div>
+                      <%= form.label :rent %><br>
+                      <%= form.text_field :rent %>
+                    </div>
+
+                      <br><br>
+
+                    <div>
+                    <%= form.label :status %><br>
+                    <%= form.select :status, ['Available', 'Unavailable'], selected: 'Available' %>
+                  </div>
+                    <br><br>
+                    <div>
+                      <%= form.submit %>
+                    </div>
+                  <% end %>
+               
+              </div>
+`
+    </div>

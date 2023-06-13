@@ -1,8 +1,9 @@
 <%= render partial: "shared/navbar" %>
 
-<div class="container" >
+<div class="container"id="Animation">
+<div >
             <div class="row">
-              <div class="col-sm-4" style="background-color: #C70039 ; height: 15.3cm;">
+              <div class="col-sm-4" style="background-color: #FF5733 ; height: 15.3cm;">
                 <br><br><br>
                 <h1 style="color: white;">Welcome To</h1>
                 <div class="logo" style="color: white;">REN<span style="color: greenyellow;">T</span>OGO</div>
@@ -18,33 +19,38 @@
               </div>
               <div class="col-sm-8" style="background-color: white;height: 15.3cm;">
                 <%= form_with model: @product do |form| %>
-                    <center> <h1 style="color: #581845;">Want To Give For Rent</h1></center>
+                                   <center> <h1 style="color: #581845;">Want To Give For Rent</h1></center>
 
-                    <div>
-                      <%= form.label :name %><br>
-                      <%= form.text_field :name %>
-                    </div>
-
-                    <div>
-                      <%= form.label :rent %><br>
-                      <%= form.text_field :rent %>
-                    </div>
-
-                      <div>
-                      <%= form.label "Product Image" %><br>
-                      <%= form.file_field :image %>
-                    </div>
-
-                    <div>
-                    <%= form.label :status %><br>
-                    <%= form.select :status, ['Available', 'Unavailable'], selected: 'Available' %>
+                  <div>
+                    <%= form.label :name %><br>
+                    <%= form.text_field :name %>
                   </div>
-
+                  <br><br>
+                  <div>
+                    <%= form.label :rent %><br>
+                    <%= form.text_field :rent %>
+                  </div>
+                      <br><br>
                     <div>
-                      <%= form.submit %>
-                    </div>
-                  <% end %>
+                    <%= form.label "Product Image" %><br>
+                    <%= form.file_field :image %>
+                  </div>
+                    <br><br>
+                  <div>
+                  <%= form.label :status %><br>
+                  <%= form.select :status, ['Available', 'Unavailable'], selected: 'Available' %>
+                </div>
+                  <br><br>
+                  <div>
+                    <%= form.submit %>
+                  </div>
+                <% end %>
                
               </div>
 `
     </div>
+    </div>
+
+
+
+    
