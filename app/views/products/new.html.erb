@@ -1,6 +1,6 @@
 <%= render partial: "shared/navbar" %>
 
-<div class="container"id="Animation">
+<div class="container">
 <div >
             <div class="row">
               <div class="col-sm-4" style="background-color: #FF5733 ; height: 15.3cm;">
@@ -19,13 +19,16 @@
               </div>
               <div class="col-sm-8" style="background-color: white;height: 15.3cm;">
                 <%= form_with model: @product do |form| %>
-                                   <center> <h1 style="color: #581845;">Want To Give For Rent</h1></center>
+                  <center> <h1 style="color: #581845;">Want To Give For Rent</h1></center>
 
                   <div>
                     <%= form.label :name %><br>
                     <%= form.text_field :name %>
+                    <% @product.errors.full_messages_for(:name).each do |message|%>
+                    <div> <%=message%></div>
+                    <%end%>
                   </div>
-                  <br><br>
+                  
                   <div>
                     <%= form.label :rent %><br>
                     <%= form.text_field :rent %>
@@ -35,12 +38,12 @@
                     <%= form.label "Product Image" %><br>
                     <%= form.file_field :image %>
                   </div>
-                    <br><br>
+                    
                   <div>
                   <%= form.label :status %><br>
                   <%= form.select :status, ['Available', 'Unavailable'], selected: 'Available' %>
                 </div>
-                  <br><br>
+                 
                   <div>
                     <%= form.submit %>
                   </div>

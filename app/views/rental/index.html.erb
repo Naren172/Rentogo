@@ -1,21 +1,25 @@
 <%= render partial: "shared/navbarrenter" %>
-
-<h1>products</h1>
-
+<center>
+<h1>Your History</h1>
 <ul>
-  <% @products.each do |product| %> 
-    <li>
-      
-        <%= product.name %>
-        <%= product.rent%>
-        <%= button_to "Buy", payment_path(product)%>
-        <%= link_to "Add Reviews", rating_path(product)%>
-        <%
-=begin%>
- <%= button_to "Buy", checkout_create_path,params: {id:product.id},  remote: true%> 
-<%
-=end%>
-      </a>
-    </li>
+  <% @rentals.each do |rental| %> 
+    <div class="card">
+
+      <%product=Product.find(rental.product_id)%>
+      <li>
+        <%= product.name %> <br>
+        <%= product.rent%> <br>
+        <% if rental.payment_history%>
+       Bought
+        <%else%>
+        <%= link_to "Buy", payment_path(rental: rental,product: product)%>
+        <%end%>
+<br>
+  
+        </li>
+  </div>
+<br><br>
   <% end %>
+
 </ul>
+</center>

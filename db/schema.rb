@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_12_171416) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_14_105133) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,10 +62,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_171416) do
   end
 
   create_table "payment_histories", force: :cascade do |t|
-    t.string "paymentmethod"
     t.bigint "rental_history_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cardnumber"
+    t.string "expiry"
+    t.string "cvc"
+    t.integer "amount"
     t.index ["rental_history_id"], name: "index_payment_histories_on_rental_history_id"
   end
 
@@ -93,12 +96,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_171416) do
   create_table "rental_histories", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "renter_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_rental_histories_on_product_id"
     t.index ["renter_id"], name: "index_rental_histories_on_renter_id"
-    t.index ["user_id"], name: "index_rental_histories_on_user_id"
   end
 
   create_table "renters", force: :cascade do |t|
@@ -126,5 +127,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_171416) do
   add_foreign_key "products", "users"
   add_foreign_key "rental_histories", "products"
   add_foreign_key "rental_histories", "renters"
-  add_foreign_key "rental_histories", "users"
 end

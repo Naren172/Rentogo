@@ -1,4 +1,4 @@
-<%= render partial: "shared/navbarrenter" %>
+<%= render partial: "shared/navbar" %>
 
 <h1>Rating</h1>
 <div class="container">
@@ -19,7 +19,7 @@
 <%= form_with url: ratings_path, method: :post do |form| %>
 
   <div>
-    <%= form.hidden_field :product_id, value: @product.id %>
+    <%= form.hidden_field :renter_id, value: @renter.id %>
     <div>
     <%= form.label :rating %><br>
 <%= form.number_field :rating, in: 1..5, step: 0.5 %>  </div>
@@ -33,6 +33,7 @@
 
   <div>
     <%= form.submit "Submit"%>
+  </div>
   </div>
 <% end %>
 </div>

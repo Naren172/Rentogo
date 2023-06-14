@@ -15,7 +15,15 @@ class ProductsController < ApplicationController
     image=@userdata["image"]
     @userdata.delete("image")
     @product=@user.products.create(@userdata)
+
+    if @product
+    else
+
+    end
     @product.image.attach(image)
+
+  # rescue StandardError => e 
+
     redirect_to owner_path
   
   end

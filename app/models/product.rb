@@ -7,4 +7,6 @@ class Product < ApplicationRecord
   def unavailable?
     status=='Unavailable'
   end
+
+  validates :name, presence: true, length: { minimum: 5 }
 end

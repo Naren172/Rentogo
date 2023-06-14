@@ -1,15 +1,37 @@
-<%= render partial: "shared/navbar" %>
-
-<h1>Add New Product</h1>
-
-<%= form_with model: @payment,url: payment_path do |form| %>
-
-  <div>
-  <%= form.label :paymentmethod %><br>
-  <%= form.select :paymentmethod, ['card', 'cash'], selected: 'card' %>
+<%= render partial: "shared/navbarrenter" %>
+<br><br><div class="container">
+<div class="row">
+<div class="col-sm-4" style="background-color: #FF5733 ; height: 14.5cm;">
+                <br><br><br>
+                <h1 style="color: white;">Welcome To</h1>
+                <div class="logo" style="color: white;">REN<span style="color: greenyellow;">T</span>OGO</div>
+                </h1><br><br>
+                <h3 style="color: #E5E4E2;">Pay Securely</h3>
+                <br><br>
+              </div>
+              <div class="col-sm-8" style="background-color: white;height: 15.3cm;">
+              <h1 style="color: #581845;">Make a Payment</h1>
+              <%= form_with url: payment1_path, local: true do |form| %>
+                <div>
+                  <%=form.hidden_field "rental_id",value:@rental.id%>
+                </div>  
+              <div>
+                  <%=form.hidden_field "amount",value:@product.rent%>
+              </div>
+                <label for="cardnumber">Card Number</label><br>
+                <%= form.text_field :cardnumber, required: true %>
+              <br>
+                <label for="expiry">Expiration Date</label><br>
+                <%= form.text_field :expiry, required: true %>
+                <br>
+                <label for="cvc">CVC</label><br>
+                <%= form.text_field :cvc ,required: true %>
+              <br>
+                <label for="amount">Amount</label><br>
+                <%= form.number_field :amount1, value:@product.rent, disabled: true%>
+              <br><br>
+                <%= form.submit "Pay Now" %>
+              <% end %>
 </div>
-
-  <div>
-    <%= form.submit "Pay"%>
-  </div>
-<% end %>
+</div>
+</div>
