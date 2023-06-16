@@ -3,6 +3,6 @@ class IndexController < ApplicationController
 
     end
     def owner
-        #gvhuijlbhjjbj
+        
     end
 end

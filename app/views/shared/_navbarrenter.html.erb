@@ -23,7 +23,12 @@
         <li><a href="http://127.0.0.1:3000/paymenthistory" style="color: black;">Payments</a></li>
 
       </ul>
-     
+      
+      <ul class="nav navbar-nav navbar-right" style="padding: 2%;">
+      <% if account_signed_in?%>
+            <%=button_to "Logou",destroy_account_session_path,method: :delete %>
+      <% end %>
+      </ul>
     </div>
   </div>
 </nav>

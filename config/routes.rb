@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :account1s
+  devise_for :accounts
  get "renter", to: "main#index"
  get "owner", to:"index#owner"
 #  get "sign-up", to: "registration#new"
