@@ -1,11 +1,7 @@
 <%= render partial: "shared/navbarrenter" %>
-
-
-
 <%
 =begin%>
  <ul>
-
   <% @products.each do |product| %>
   <% unless product.unavailable? %>
     <%= product.name%>
@@ -27,51 +23,43 @@
 </ul> 
 <%
 =end%>
-
-
-
 <div class="container">
-           
-          <% @products.each do |product| %>
-          <% unless product.unavailable? %>
-            <div class="row">
-             
-              <div class="col-md-6" style="top:20%;">
-                <div id="myCarousel" class="carousel slide" data-ride="carousel"> 
-                    <center> 
-                      <div class="item active">
-                        <img src="<%=(url_for(product.image))%>" alt="Los Angeles" style="width:50%;height:50%;">
-                      </div>
-                    </center>
-                </div>
+  <% @products.each do |product| %>
+  <% unless product.unavailable? %>
+    <div class="row">
+      <div class="col-md-6" style="top:20%;">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel"> 
+            <center> 
+              <div class="item active">
+                <img src="<%=(url_for(product.image))%>" alt="Los Angeles" style="width:50%;height:50%;">
               </div>
-              <div class="col-md-6">
-                <center><h1 style="font-size: 18px;">AMOUNT:RS <%=product.rent%></h1></center>
-                <br>
-                <h1 style="font-size: 18px;">Details</h1>
-                <p><%=product.name%></p>
-                  <h1 style="font-size: 18px; border-style: solid;padding: .3cm;">The amount can be paid either through cash or using UPI in the time of delivery</h1>
-                  <li style="background-color: #FF5733;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><%= link_to "View", showproduct_path(product.id) %></center></li>
-                  <% n=0%>
-                  <% @applicants.each do|app|%>
-                    <% if app.product_id==product.id%>
-                      <%n=1%>
-                    <%end%>
-                  <%end%>
-                  <% if n==0%>
-                  <li style="background-color: #FF5733;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><%= link_to "Add", apply_path(product.id) %></center></li>
-                  <% else%>
-                  Applied
-                  <%end%>
-                  <br>
-                  <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-                  <br>
-              </div>
-
-            </div>
-            
-             <% end %>
+            </center>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <center><h1 style="font-size: 18px;">AMOUNT:RS <%=product.rent%></h1></center>
+        <br>
+        <h1 style="font-size: 18px;">Details</h1>
+        <p><%=product.name%></p>
+        <h1 style="font-size: 18px; border-style: solid;padding: .3cm;">The amount can be paid either through cash or using UPI in the time of delivery</h1>
+        <li style="background-color: #FF5733;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><%= link_to "View", showproduct_path(product.id) %></center></li>
+        <% n=0%>
+        <% @applicants.each do|app|%>
+          <% if app.product_id==product.id%>
+            <%n=1%>
+          <%end%>
+        <%end%>
+        <% if n==0%>
+          <li style="background-color: #FF5733;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><%= link_to "Add", apply_path(product.id) %></center></li>
+        <% else%>
+          Applied
+        <%end%>
+        <br>
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+        <br>
+      </div>
+    </div>
+    <% end %>
   <%end%>
-  
-            </div>
+</div>
 

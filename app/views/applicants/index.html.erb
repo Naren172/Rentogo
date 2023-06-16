@@ -1,20 +1,19 @@
 <%= render partial: "shared/navbarrenter" %>
 <center>
-<h1>Applications</h1>
-
-
-<ul>
-  <% @applicants.each do |applicant| %>
-   
-    <div class="card">
-     <li> 
-        <%=Product.find(applicant.product_id).name%> <br>
-        <%= applicant.status %>
-    </li>
-    <li><%= link_to "View Product", show_path(applicant.product_id) %></li>
-    <%= button_to "Delete", delete_path(applicant), method: :delete %>
-    </div>
-<br><br>
-  <% end %>
-</ul>
+  <h1>Applications</h1>
+  <ul>
+    <% @applicants.each do |applicant| %>
+      <div class="card">
+        <li> 
+            <%=Product.find(applicant.product_id).name%> <br>
+            <%= applicant.status %>
+        </li>
+        <li>
+            <%= link_to "View Product", show_path(applicant.product_id) %>
+        </li>
+      <%= button_to "Delete", delete_path(applicant), method: :delete %>
+      </div>
+      <br><br>
+    <% end %>
+  </ul>
 </center>

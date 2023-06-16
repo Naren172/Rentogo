@@ -1,44 +1,32 @@
 <%= render partial: "shared/navbarrenter" %>
-
 <h1>Rating</h1>
 <div class="container">
-<div class="row">
-<div class="col-sm-4" style="background-color: #FF5733 ; height: 10cm;">
-                <br><br><br>
-                <h1 style="color: white;">Welcome To</h1>
-                <div class="logo" style="color: white;">REN<span style="color: greenyellow;">T</span>OGO</div>
-                </h1><br><br>
-                <h3 style="color: #E5E4E2;">Safety precautions during COVID-19. We’re taking additional steps and precautionary measures to protect our community from COVID-19.</h3>
-                <br><br>
-                
-              
-              </div>
-<div class="col-sm-8" style="background-color: white;height: 15.3cm;">
-                   <h1 style="color: #581845;">Provide Rating</h1>
-
-<%= form_with url: deliverys, method: :post do |form| %>
-
-  <div>
-    <%= form.hidden_field :payment_id, value: @payment_id %>
-    <div>
-   
-    <%= form.label :location %><br>
-    <%= form.text_field :location %>
+  <div class="row">
+    <div class="col-sm-4" style="background-color: #FF5733 ; height: 10cm;">
+      <br><br><br>
+      <h1 style="color: white;">Welcome To</h1>
+      <div class="logo" style="color: white;">REN<span style="color: greenyellow;">T</span>OGO</div>
+      </h1><br><br>
+      <h3 style="color: #E5E4E2;">Safety precautions during COVID-19. We’re taking additional steps and precautionary measures to protect our community from COVID-19.</h3>
+      <br><br>
+    </div>
+  <div class="col-sm-8" style="background-color: white;height: 15.3cm;">
+    <h1 style="color: #581845;">Provide Rating</h1>
+    <%= form_with url: deliverys, method: :post do |form| %>
+      <div>
+        <%= form.hidden_field :payment_id, value: @payment_id %>
+        <div>
+          <%= form.label :location %><br>
+          <%= form.text_field :location %>
+        </div>
+        <div>
+          <%= form.label :Pin Code%><br>
+          <%= form.number_field :Pin Code %>
+        </div>
+      </div>
+      <div>
+        <%= form.submit "Submit"%>
+      </div>
+    <% end %>
   </div>
-   
-   <div>
-   
-    <%= form.label :Pin Code%><br>
-    <%= form.number_field :Pin Code %>
-  </div>
-
-    
-  </div>
-
-  <div>
-    <%= form.submit "Submit"%>
-  </div>
-<% end %>
-</div>
-</div>
 </div>

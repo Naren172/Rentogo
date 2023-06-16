@@ -1,16 +1,15 @@
 <%= render partial: "shared/navbar" %>
 <center>
-<h1>products</h1>
-<ul>
-  <% @rentals.each do |rental| %>
-  <div class="card">
-   <%if rental.payment_history%>
-    <%renter=Renter.find(rental.renter_id)%>
-    Renter: <a href="/view-profile/<%= renter.id%>"><%=renter.name %></a><br>
-    Amount: <%=rental.payment_history.amount%>
-   
-   <%end%>
-   </div>
-  <% end %>
-</ul>
+  <h1>products</h1>
+  <ul>
+    <% @rentals.each do |rental| %>
+    <div class="card">
+      <%if rental.payment_history%>
+        <%renter=Renter.find(rental.renter_id)%>
+        Renter: <a href="/view-profile/<%= renter.id%>"><%=renter.account.name %></a><br>
+        Amount: <%=rental.payment_history.amount%>
+      <%end%>
+    </div>
+    <% end %>
+  </ul>
 </center>

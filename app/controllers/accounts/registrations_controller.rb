@@ -15,14 +15,18 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
     accountable = if params[:role][:role]=="Renter"
         Renter.new(renter_params)
     elsif params[:role][:role]=="Owner"
-      Owner.new
+      User.new
     end
     accountable.save
     puts accountable.id
 
     build_resource(sign_up_params)
     resource.name = params[:account][:name]
-    resource.accountable_type=params[:role][:role].camelcase
+    if params[:role][:role]=="Owner"
+      resource.accountable_type="User"
+    elsif
+      resource.accountable_type=params[:role][:role].camelcase
+    end
     resource.accountable_id = accountable.id
     resource.save
     yield resource if block_given?
@@ -42,8 +46,7 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
-  end
-
+ 
   # GET /resource/edit
   # def edit
   #   super
@@ -68,7 +71,7 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -82,26 +85,26 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    if resource.user!
+    if resource.user?
       owner_path
-    elsif
+    elsif resource.renter?
       renter_path
     end
   end
 
 
   private
-  def renter_params
-    params.require(:renter_attributes).permit(:aadhar)
-  end
-  def account_params
-    params.require(:account).permit(:name)
-  end
-  def role_params
-    params.require(:role).permit(:role)
-  end
+    def renter_params
+      params.require(:renter_attributes).permit(:aadhar)
+    end
+    def account_params
+      params.require(:account).permit(:name)
+    end
+    def role_params
+      params.require(:role).permit(:role)
+    end
 
-  # The path used after sign up for inactive accounts.
+  # The path used after sign up for inactive acts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end

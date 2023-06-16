@@ -1,24 +1,23 @@
 <%= render partial: "shared/navbarrenter" %>
 <div class="container">
-            <div class="row">
-             
-              <div class="col-md-6" style="top:20%;">
-                <div id="myCarousel" class="carousel slide" data-ride="carousel"> 
-                    <center> 
-                      <div class="item active">
-                        <img src="<%=(url_for(@product.image))%>" alt="Los Angeles" style="width:50%;height:50%;">
-                      </div>
-                    </center>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <center><h1 style="font-size: 18px;">AMOUNT:RS <%=@product.rent%></h1></center>
-                <br>
-                <h1 style="font-size: 18px;">Details</h1>
-                <p><%=@product.name%></p>
-                <h1 style="font-size: 18px; border-style: solid;padding: .3cm;">The amount can be paid either through cash or using UPI in the time of delivery</h1>
-                <%= link_to "Add Reviews", rating_path(@product)%>
-              </div>
-             </div>
+  <div class="row">
+    <div class="col-md-6" style="top:20%;">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel"> 
+          <center> 
+            <div class="item active">
+              <img src="<%=(url_for(@product.image))%>" alt="Los Angeles" style="width:50%;height:50%;">
             </div>
+          </center>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <center><h1 style="font-size: 18px;">AMOUNT:RS <%=@product.rent%></h1></center>
+      <br>
+      <h1 style="font-size: 18px;">Details</h1>
+      <p><%=@product.name%></p>
+      <h1 style="font-size: 18px; border-style: solid;padding: .3cm;">The amount can be paid either through cash or using UPI in the time of delivery</h1>
+      <%= link_to "Add Reviews", rating_path(@product)%>
+    </div>
+    </div>
+  </div>
 </div>

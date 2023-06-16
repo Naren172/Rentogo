@@ -1,10 +1,11 @@
 class PaymentsController < ApplicationController
+    before_action :authenticate_account!
+    before_action :is_renter?, except: [:producthistory]
     def new
         @payment=PaymentHistory.new
         @product=Product.find(params[:product])
         @rental=RentalHistory.find(params[:rental])
     end
-
 
     def create
         @payment=PaymentHistory.new
@@ -22,9 +23,9 @@ class PaymentsController < ApplicationController
         redirect_to rentershow_path
     end
 
-
     def show
-        renter=Renter.first
+        account=current_account
+        renter=Renter.find(account.accountable_id)
         @rentals=renter.rental_histories 
     end
 
@@ -35,7 +36,17 @@ class PaymentsController < ApplicationController
     def producthistory
         product=Product.find(params[:id])
         @rentals=product.rental_histories
-        
+    end
 
+    private
+    def is_renter?
+        unless account_signed_in? && current_account.renter?
+            flash[:alert] = "Unauthorized action"
+            if account_signed_in?
+                redirect_to owner_path
+            else
+                redirect_to new_account_session_path
+            end
+        end
     end
 end

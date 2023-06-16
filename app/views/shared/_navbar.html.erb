@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>                        
       </button>
       <br>
-      <a class="navbar-brand" href="http://127.0.0.1:3000/renterindex"><div class="logo" style="color: black;">REN<span style="color: #FF5733;">T</span>OGO</div></a>
+      <a class="navbar-brand" href="http://127.0.0.1:3000/ownerindex"><div class="logo" style="color: black;">REN<span style="color: #FF5733;">T</span>OGO</div></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -17,9 +17,13 @@
         <li><a href="http://127.0.0.1:3000/products" style="color: black;">Your Products</a></li>
     
       </ul>
+      <ul class="nav navbar-nav navbar-right" style="padding: 2%;">
        <% if account_signed_in?%>
-            <%=button_to "Logou",destroy_account_session_path,method: :delete %>
-      <% end %>
+        <%= button_to destroy_account_session_path,method: :delete  do %>
+            <i class="i fa fa-user"></i>
+        <%end%>
+      <%end%>
+      </ul>
     </div>
   </div>
 </nav>
