@@ -1,8 +1,7 @@
 <%= render partial: "shared/navbarrenter" %>
-<h1>Rating</h1>
 <div class="container">
   <div class="row">
-    <div class="col-sm-4" style="background-color: #FF5733 ; height: 10cm;">
+    <div class="col-sm-4" style="background-color: #FF5733 ; height: 13cm;">
       <br><br><br>
       <h1 style="color: white;">Welcome To</h1>
       <div class="logo" style="color: white;">REN<span style="color: greenyellow;">T</span>OGO</div>
@@ -11,17 +10,16 @@
       <br><br>
     </div>
   <div class="col-sm-8" style="background-color: white;height: 15.3cm;">
-    <h1 style="color: #581845;">Provide Rating</h1>
-    <%= form_with url: deliverys, method: :post do |form| %>
+    <h1 style="color: #581845;">Delivery</h1>
+    <%= form_with url: deliverys_path, method: :post do |form| %>
       <div>
-        <%= form.hidden_field :payment_id, value: @payment_id %>
+        <%= form.hidden_field :payment_id, value: @payment.id %>
         <div>
           <%= form.label :location %><br>
           <%= form.text_field :location %>
         </div>
         <div>
-          <%= form.label :Pin Code%><br>
-          <%= form.number_field :Pin Code %>
+          
         </div>
       </div>
       <div>

@@ -6,31 +6,38 @@ class ProductsController < ApplicationController
       user=User.find(current_account.accountable_id)
       @products=user.products
     end
+
     def show
       @product=Product.find(params[:id])
     end
+
     def new
       @product = Product.new
     end
 
     def create
       account=current_account
-      @user=User.find(account.accountable_id)
-      @userdata=product_params
-      image=@userdata["image"]
-      @userdata.delete("image")
-      @product=@user.products.create(@userdata)
-      @product.image.attach(image)
+      user=User.find(account.accountable_id)
+      userdata=product_params
+      image=userdata["image"]
+      userdata.delete("image")
+      product=user.products.create(userdata)
+      product.image.attach(image)
       redirect_to owner_path
     end
+    
     def edit
       @product = Product.find(params[:id])
     end
 
     def update
-      @product = Product.find(params[:id])
-      puts(@product)
-      if @product.update(product_params)
+      product = Product.find(params[:id])
+      unless product.user_id==current_account.accountable_id
+        redirect_to owner_path
+        return
+      end
+      puts(product)
+      if product.update(product_params)
         redirect_to product_path
       else
         render :edit, status: :unprocessable_entity
@@ -38,8 +45,12 @@ class ProductsController < ApplicationController
     end
 
     def destroy
-      @product = Product.find(params[:id])
-      @product.destroy
+      product = Product.find(params[:id])
+      unless product.user_id==current_account.accountable_id
+        redirect_to owner_path
+        return
+      end
+      product.destroy
       redirect_to owner_path
     end
 

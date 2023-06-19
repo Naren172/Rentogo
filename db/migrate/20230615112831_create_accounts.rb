@@ -6,7 +6,6 @@ class CreateAccounts < ActiveRecord::Migration[7.0]
       t.timestamps
     end
     
-
     remove_column :renters,:name
     remove_column :renters,:email
     remove_column :renters,:password_digest

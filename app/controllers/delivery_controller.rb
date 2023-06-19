@@ -5,11 +5,18 @@ class DeliveryController < ApplicationController
         @delivery=Delivery.new
         @payment=PaymentHistory.find(params[:id])
     end
+    
     def create
         delivery=Delivery.new
-        rental=RentalHistory.dind(params[:])
-        delivery.
+        pay=PaymentHistory.find(params[:payment_id])
+        delivery.location=params[:location]
+        delivery.rental_history_id=pay.rental_history_id
+        pay.delivery=delivery
+        delivery.save
+        pay.save
+        redirect_to rentershow_path
     end
+
     private
     def is_renter?
         unless account_signed_in? && current_account.renter?

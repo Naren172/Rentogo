@@ -3,14 +3,14 @@ class IndexController < ApplicationController
     before_action :is_renter? , except: [:owner]
     before_action :is_owner? , except: [:renter]
     def renter
-
     end
+
     def owner
-
     end
+
     def user
-
     end
+
     private
     def is_renter?
         unless account_signed_in? && current_account.renter?
@@ -22,7 +22,7 @@ class IndexController < ApplicationController
             end
         end
     end
-    private
+
     def is_owner?
         unless account_signed_in? && current_account.user?
             flash[:alert] = "Unauthorized action"

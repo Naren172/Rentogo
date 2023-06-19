@@ -46,17 +46,21 @@
           <%= form.label :name %><br>
           <%= form.text_field :name %>
         </div>
-        <br><br>
+        <br>
+        <div>
+            <%= form.label :description %><br>
+            <%= form.text_area :description %>
+          </div> <br>
         <div>
           <%= form.label :rent %><br>
           <%= form.text_field :rent %>
         </div>
-        <br><br>
+        <br>
         <div>
         <%= form.label :status %><br>
         <%= form.select :status, ['Available', 'Unavailable'], selected: 'Available' %>
         </div>
-        <br><br>
+        <br>
         <div>
           <%= form.submit %>
         </div>

@@ -3,15 +3,15 @@ class RentalController < ApplicationController
     before_action :is_renter? , except: [:producthistory,:new]
     
     def new
-        @rental=RentalHistory.new
-        @product=Product.find(params[:productid])
-        @product.rental_histories<<@rental
-        @renter=Renter.find(params[:renterid])
-        @renter.rental_histories<<@rental
-        @product.update(status:"Unavailable")
-        @rental.save
-        @product.save
-        @renter.save
+        rental=RentalHistory.new
+        product=Product.find(params[:productid])
+        product.rental_histories<<rental
+        renter=Renter.find(params[:renterid])
+        renter.rental_histories<<rental
+        product.update(status:"Unavailable")
+        rental.save
+        product.save
+        renter.save
         redirect_to owner_path
     end
 

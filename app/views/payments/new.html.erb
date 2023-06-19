@@ -23,7 +23,7 @@
     <%= form.text_field :cardnumber, required: true %>
     <br>
     <label for="expiry">Expiration Date</label><br>
-    <%= form.text_field :expiry, required: true %>
+    <%= form.date_field :expiry, discard_day: true, required: true %>
     <br>
     <label for="cvc">CVC</label><br>
     <%= form.text_field :cvc ,required: true %>

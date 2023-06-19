@@ -19,4 +19,5 @@ class Account < ApplicationRecord
       false
     end
   end
+  
 end

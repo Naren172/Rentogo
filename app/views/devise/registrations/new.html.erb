@@ -3,7 +3,7 @@
                    <center> <h1 style="color: #581845;">SIGNUP</h1></center>
 
             <div class="row">
-              <div class="col-sm-4" style="background-color: #FF5733 ; height: 16.3cm;">
+              <div class="col-sm-4" style="background-color: #FF5733 ; height: 17.3cm;">
                 <br><br><br>
                 <h1 style="color: white;">Welcome To</h1>
                 <div class="logo" style="color: white;">REN<span style="color: greenyellow;">T</span>OGO</div>
@@ -43,6 +43,14 @@
       <div class="my-2 form-group field">
         <%= renter.label :aadhar %><br />
         <%= renter.text_field :aadhar %>
+      </div>
+      <%end%>
+      </div>
+      <div id="user_attributes">
+    <%=fields_for :user_attributes do |user| %>
+      <div class="my-2 form-group field">
+        <%= user.label :address %><br />
+        <%= user.text_field :address %>
       </div>
       <%end%>
       </div>

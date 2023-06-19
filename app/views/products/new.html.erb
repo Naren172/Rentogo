@@ -2,7 +2,7 @@
 <div class="container">
   <div >
     <div class="row">
-      <div class="col-sm-4" style="background-color: #FF5733 ; height: 15.3cm;">
+      <div class="col-sm-4" style="background-color: #FF5733 ; height: 15.8cm;">
         <br><br><br>
         <h1 style="color: white;">Welcome To</h1>
         <div class="logo" style="color: white;">REN<span style="color: greenyellow;">T</span>OGO</div>
@@ -13,7 +13,7 @@
         </h5>
         <br><br><br>
       </div>
-      <div class="col-sm-8" style="background-color: white;height: 15.3cm;">
+      <div class="col-sm-8" style="background-color: white;height: 15.8cm;">
         <%= form_with model: @product do |form| %>
           <center> <h1 style="color: #581845;">Want To Give For Rent</h1></center>
           <div>
@@ -22,6 +22,10 @@
             <% @product.errors.full_messages_for(:name).each do |message|%>
             <div> <%=message%></div>
             <%end%>
+          </div>
+          <div>
+            <%= form.label :description %><br>
+            <%= form.text_area :description %>
           </div>
           <div>
             <%= form.label :rent %><br>

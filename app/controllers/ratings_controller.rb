@@ -3,10 +3,8 @@ class RatingsController < ApplicationController
     before_action :is_owner?, except: [:newproduct , :createproduct]
     def newproduct
         @product=Product.find(params[:id])
-        puts @product
         @rating=Rating.new
     end
-
 
     def createproduct
         account=current_account
@@ -24,18 +22,16 @@ class RatingsController < ApplicationController
         @rating=Rating.new
     end
 
-
     def createuser
 
-        @user=User.find(current_account.accountable_id)
-        @rating=Rating.new(comment:params[:comment],rating:params[:rating],from_id:@user.id)
-        @renter=Renter.find(params[:renter_id])
-        @renter.ratings<<@rating
-        @rating.save
-        @renter.save
+        user=User.find(current_account.accountable_id)
+        rating=Rating.new(comment:params[:comment],rating:params[:rating],from_id:user.id)
+        renter=Renter.find(params[:renter_id])
+        renter.ratings<<rating
+        rating.save
+        renter.save
         redirect_to products_path
     end
-
 
     def is_owner?
         unless account_signed_in? && current_account.user?

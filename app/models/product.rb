@@ -9,4 +9,10 @@ class Product < ApplicationRecord
   end
 
   validates :name, presence: true, length: { minimum: 5 }
+  validates :rent, presence: true
+
+
+  scope :available_products , -> { Product.where("status = ?" , "Available")}
+  scope :unavailable_products , -> { Product.where("status = ?" , "Unavailable")}
+
 end

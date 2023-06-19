@@ -73,5 +73,6 @@ end
 
 gem 'stripe'
 
-
+gem 'activeadmin'
+gem 'sass-rails'
 gem "devise", "~> 4.9"

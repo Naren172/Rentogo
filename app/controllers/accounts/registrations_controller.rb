@@ -15,7 +15,7 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
     accountable = if params[:role][:role]=="Renter"
         Renter.new(renter_params)
     elsif params[:role][:role]=="Owner"
-      User.new
+      User.new(owner_params )
     end
     accountable.save
     puts accountable.id
@@ -96,6 +96,9 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
   private
     def renter_params
       params.require(:renter_attributes).permit(:aadhar)
+    end
+    def owner_params
+      params.require(:user_attributes).permit(:address)
     end
     def account_params
       params.require(:account).permit(:name)

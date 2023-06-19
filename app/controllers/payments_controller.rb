@@ -17,10 +17,9 @@ class PaymentsController < ApplicationController
         rental.payment_history=@payment
         product=Product.find(rental.product_id)
         product.applicants.delete_all   
-        
         @payment.save
         rental.save
-        redirect_to rentershow_path
+        redirect_to delivery_path(@payment)
     end
 
     def show

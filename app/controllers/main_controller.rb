@@ -8,6 +8,7 @@ class MainController < ApplicationController
         @applicants=Applicant.where(renter_id:@renter.id)
 
     end
+    
     def show
         @product=Product.find(params[:id])
         @ratings=@product.ratings
