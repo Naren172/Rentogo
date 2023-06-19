@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get "applications/:id" ,to:"applicants#show" ,as:'show'
   get "applications" ,to:"applicants#index"
   get "view/:id" ,to:"applicants#view" ,as:'view'
-  get "delivery/:id", to: "delivery#new" ,as:'delivery'
+  get "delivery/:paymentid/:rentalid", to: "delivery#new" ,as:'delivery'
   post "deliverys", to: "delivery#create"
   get "view-profile/:id", to:"renters#view", as:'view-profile'
   get "accept/:id", to:"applicants#accept", as:'accept'
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   post "payment1", to:"payments#create" ,as:'payment1'
   get "rating/:id", to:"ratings#newproduct" ,as:'rating'
   get "rrating/:id", to:"ratings#newrenter" ,as:'rrating'
-  post "rratings/:id", to:"ratings#createrenter" ,as:'rratings'
+  post "rratings/:id", to:"ratings#createuser" ,as:'rratings'
   post "ratings", to:"ratings#createproduct" ,as:'ratings'
   get "ownerindex", to:"index#owner"
   get "renterindex", to:"index#renter"

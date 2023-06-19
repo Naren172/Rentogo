@@ -8,11 +8,14 @@ class Product < ApplicationRecord
     status=='Unavailable'
   end
 
-  validates :name, presence: true, length: { minimum: 5 }
-  validates :rent, presence: true
+ 
 
 
   scope :available_products , -> { Product.where("status = ?" , "Available")}
   scope :unavailable_products , -> { Product.where("status = ?" , "Unavailable")}
+
+  validates :name, length: { in: 3..30 }
+  validates :description, length: {minimum:10,maximum:1500,:too_short=>"is too short",:too_long=>"is too long"}
+
 
 end

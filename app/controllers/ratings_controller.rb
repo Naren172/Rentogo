@@ -9,12 +9,16 @@ class RatingsController < ApplicationController
     def createproduct
         account=current_account
         user=Renter.find(account.accountable_id)
-        rating=Rating.new(comment:params[:comment],rating:params[:rating],from_id:user.id)
+        @rating=Rating.new(comment:params[:comment],rating:params[:rating],from_id:user.id)
         product=Product.find(params[:product_id])
-        product.ratings<<rating
-        rating.save
+        product.ratings<<@rating
         product.save
-        redirect_to rentershow_path
+        if @rating.save
+            redirect_to rentershow_path
+        else
+            render :new, status: :unprocessable_entity
+        end
+
     end
 
     def newrenter
@@ -25,12 +29,15 @@ class RatingsController < ApplicationController
     def createuser
 
         user=User.find(current_account.accountable_id)
-        rating=Rating.new(comment:params[:comment],rating:params[:rating],from_id:user.id)
+        @rating=Rating.new(comment:params[:comment],rating:params[:rating],from_id:user.id)
         renter=Renter.find(params[:renter_id])
-        renter.ratings<<rating
-        rating.save
+        renter.ratings<<@rating
         renter.save
-        redirect_to products_path
+        if @rating.save
+            redirect_to products_path
+        else
+            render :new, status: :unprocessable_entity
+        end
     end
 
     def is_owner?

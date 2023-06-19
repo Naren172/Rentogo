@@ -21,11 +21,15 @@ class ProductsController < ApplicationController
       userdata=product_params
       image=userdata["image"]
       userdata.delete("image")
-      product=user.products.create(userdata)
-      product.image.attach(image)
-      redirect_to owner_path
+      @product=user.products.create(userdata)
+      @product.image.attach(image)
+      if @product.save
+        redirect_to owner_path
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
-    
+
     def edit
       @product = Product.find(params[:id])
     end
@@ -55,7 +59,7 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      params.require(:product).permit(:name,:rent,:status,:image)
+      params.require(:product).permit(:name,:rent,:status,:image,:description)
     end
 
     private

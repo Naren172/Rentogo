@@ -15,6 +15,9 @@
       <div>
         <%= form.hidden_field :payment_id, value: @payment.id %>
         <div>
+        <div>
+        <%= form.hidden_field :rental_id, value: @rental.id %>
+        <div>
           <%= form.label :location %><br>
           <%= form.text_field :location %>
         </div>

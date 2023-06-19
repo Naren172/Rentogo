@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_19_081437) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_19_122444) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -120,14 +120,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_19_081437) do
   end
 
   create_table "payment_histories", force: :cascade do |t|
-    t.bigint "rental_history_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "cardnumber"
     t.string "cvc"
     t.integer "amount"
     t.date "expiry"
-    t.index ["rental_history_id"], name: "index_payment_histories_on_rental_history_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -178,7 +176,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_19_081437) do
   add_foreign_key "applicants", "products"
   add_foreign_key "deliveries", "payment_histories"
   add_foreign_key "deliveries", "rental_histories"
-  add_foreign_key "payment_histories", "rental_histories"
   add_foreign_key "products", "users"
   add_foreign_key "rental_histories", "products"
   add_foreign_key "rental_histories", "renters"

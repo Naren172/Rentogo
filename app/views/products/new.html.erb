@@ -2,15 +2,15 @@
 <div class="container">
   <div >
     <div class="row">
-      <div class="col-sm-4" style="background-color: #FF5733 ; height: 15.8cm;">
+      <div class="col-sm-4" style="background-color: #FF5733 ; height: 16.8cm;">
         <br><br><br>
         <h1 style="color: white;">Welcome To</h1>
         <div class="logo" style="color: white;">REN<span style="color: greenyellow;">T</span>OGO</div>
         </h1><br><br>
-        <h4 style="color: #E5E4E2;">Rentogo Is Your Ticket To A Better Lifestyle.</h4>
+        <h3 style="color: #E5E4E2;">Rentogo Is Your Ticket To A Better Lifestyle.</h3>
         <br><br>
-        <h5 style="color: #E5E4E2;">Safety precautions during COVID-19. We’re taking additional steps and precautionary measures to protect our community from COVID-19.  
-        </h5>
+        <h4 style="color: #E5E4E2;">Safety precautions during COVID-19. We’re taking additional steps and precautionary measures to protect our community from COVID-19.  
+        </h4>
         <br><br><br>
       </div>
       <div class="col-sm-8" style="background-color: white;height: 15.8cm;">
@@ -20,18 +20,21 @@
             <%= form.label :name %><br>
             <%= form.text_field :name %>
             <% @product.errors.full_messages_for(:name).each do |message|%>
-            <div> <%=message%></div>
+            <div class="form-text text-danger"><%= message %></div>
             <%end%>
           </div>
           <div>
             <%= form.label :description %><br>
             <%= form.text_area :description %>
+            <% @product.errors.full_messages_for(:description).each do |message|%>
+            <div class="form-text text-danger"><%= message %></div>
+            <%end%>
           </div>
           <div>
             <%= form.label :rent %><br>
             <%= form.text_field :rent %>
           </div>
-          <br><br>
+          <br>
           <div>
             <%= form.label "Product Image" %><br>
             <%= form.file_field :image %>

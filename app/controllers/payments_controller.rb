@@ -13,13 +13,10 @@ class PaymentsController < ApplicationController
         @payment.expiry=params[:expiry]
         @payment.cvc=params[:cvc]
         @payment.amount=params[:amount]
-        rental=RentalHistory.find(params[:rental_id])
-        rental.payment_history=@payment
         product=Product.find(rental.product_id)
         product.applicants.delete_all   
         @payment.save
-        rental.save
-        redirect_to delivery_path(@payment)
+        redirect_to delivery_path(paymentid:@payment.id,rentalid:params[:rental_id])
     end
 
     def show

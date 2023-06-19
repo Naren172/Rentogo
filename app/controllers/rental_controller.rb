@@ -12,7 +12,7 @@ class RentalController < ApplicationController
         rental.save
         product.save
         renter.save
-        redirect_to owner_path
+        redirect_to products_path
     end
 
     def index

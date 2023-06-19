@@ -11,7 +11,6 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    puts("....................")
     accountable = if params[:role][:role]=="Renter"
         Renter.new(renter_params)
     elsif params[:role][:role]=="Owner"
@@ -29,6 +28,8 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
     end
     resource.accountable_id = accountable.id
     resource.save
+
+
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
@@ -91,7 +92,6 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
       renter_path
     end
   end
-
 
   private
     def renter_params

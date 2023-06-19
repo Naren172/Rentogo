@@ -3,18 +3,20 @@ class DeliveryController < ApplicationController
     before_action :is_renter?
     def new
         @delivery=Delivery.new
-        @payment=PaymentHistory.find(params[:id])
+        @payment=PaymentHistory.find(params[:paymentid])
+        @rental=RentalHistory.find(params[:rentalid])
     end
-    
+
     def create
-        delivery=Delivery.new
-        pay=PaymentHistory.find(params[:payment_id])
-        delivery.location=params[:location]
-        delivery.rental_history_id=pay.rental_history_id
-        pay.delivery=delivery
-        delivery.save
-        pay.save
-        redirect_to rentershow_path
+        @delivery=Delivery.new
+        @delivery.location=params[:location]
+        @delivery.rental_history_id=params[:rental_id]
+        @delivery.payment_history_id=params[:payment_id]
+        if @delivery.save
+            redirect_to rentershow_path
+        else
+            render :new, status: :unprocessable_entity
+        end
     end
 
     private

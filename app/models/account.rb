@@ -19,5 +19,8 @@ class Account < ApplicationRecord
       false
     end
   end
-  
+  validates :name, length: {minimum:5}
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP ,message:"Invalid Email" }
+  validates :password, length: {minimum:6,message:"length must be a minimum of 6"}
+
 end

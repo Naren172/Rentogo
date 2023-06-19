@@ -2,13 +2,8 @@
 <center>
 <div class="card">
 <h1><%= @renter.account.name %></h1>
-<h1>Rating:<%= @averagerating%></h1>
-Previous Ratings: <br>
-<ul>
-  <% @ratings.each do |rating| %>
-   <%= rating.rating%><br>
-   <%=rating.comment%>
-  <% end %>
+<%= link_to "Add Reviews", rrating_path(@renter)%>
+
 </ul>
 </ul>
 </div>
