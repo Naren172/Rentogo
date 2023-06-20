@@ -22,7 +22,6 @@ class DeliveryController < ApplicationController
     private
     def is_renter?
         unless account_signed_in? && current_account.renter?
-            flash[:alert] = "Unauthorized action"
             if account_signed_in?
                 redirect_to owner_path
             else

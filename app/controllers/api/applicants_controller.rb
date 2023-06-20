@@ -1,4 +1,4 @@
-class ApplicantsController < ApplicationController
+class Api::ApplicantsController < Api::ApiController
     before_action :authenticate_account!
     before_action :is_renter? , except: [:accept,:reject,:view]
      def new
@@ -71,22 +71,14 @@ class ApplicantsController < ApplicationController
         applicant=Applicant.find(params[:id])
         product=Product.find(applicant.product_id)
         unless applicant.renter_id==current_account.accountable_id
-            redirect_to renterindex_path
+            render json: { message: "You are not authorized to view this page"} , status: :forbidden
             return
         end
-        applicant.destroy
-        redirect_to applications_path
+        app=applicant.destroy
+        render json: app , status: :ok
+
 
     end
 
-    private
-    def is_renter?
-        unless account_signed_in? && current_account.renter?
-            if account_signed_in?
-                redirect_to owner_path
-            else
-                redirect_to new_account_session_path
-            end
-        end
-    end
+  
 end

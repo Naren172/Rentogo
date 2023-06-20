@@ -49,12 +49,12 @@ class ProductsController < ApplicationController
     end
 
     def destroy
-      product = Product.find(params[:id])
-      unless product.user_id==current_account.accountable_id
-        redirect_to owner_path
-        return
-      end
-      product.destroy
+      @product = Product.find(params[:id])
+      # unless product.user_id==current_account.accountable_id
+      #   redirect_to owner_path
+      #   return
+      # end
+      @product.destroy
       redirect_to owner_path
     end
 
@@ -65,7 +65,6 @@ class ProductsController < ApplicationController
     private
     def is_owner?
         unless account_signed_in? && current_account.user?
-          flash[:alert] = "Unauthorized action"
           if account_signed_in?
               redirect_to renterindex_path
           else

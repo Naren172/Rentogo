@@ -13,6 +13,7 @@ class PaymentsController < ApplicationController
         @payment.expiry=params[:expiry]
         @payment.cvc=params[:cvc]
         @payment.amount=params[:amount]
+        rental=RentalHistory.find(params[:rental_id])
         product=Product.find(rental.product_id)
         product.applicants.delete_all   
         @payment.save
@@ -37,7 +38,6 @@ class PaymentsController < ApplicationController
     private
     def is_renter?
         unless account_signed_in? && current_account.renter?
-            flash[:alert] = "Unauthorized action"
             if account_signed_in?
                 redirect_to owner_path
             else

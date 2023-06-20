@@ -14,7 +14,6 @@ class IndexController < ApplicationController
     private
     def is_renter?
         unless account_signed_in? && current_account.renter?
-            flash[:alert] = "Unauthorized action"
             if account_signed_in?
                 redirect_to owner_path
             else
@@ -25,7 +24,6 @@ class IndexController < ApplicationController
 
     def is_owner?
         unless account_signed_in? && current_account.user?
-            flash[:alert] = "Unauthorized action"
             if account_signed_in?
                 redirect_to renterindex_path
             else

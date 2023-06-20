@@ -42,7 +42,6 @@ class RatingsController < ApplicationController
 
     def is_owner?
         unless account_signed_in? && current_account.user?
-            flash[:alert] = "Unauthorized action"
             if account_signed_in?
                 redirect_to renterindex_path
             else
