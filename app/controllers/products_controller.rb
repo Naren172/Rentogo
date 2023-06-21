@@ -50,10 +50,10 @@ class ProductsController < ApplicationController
 
     def destroy
       @product = Product.find(params[:id])
-      # unless product.user_id==current_account.accountable_id
-      #   redirect_to owner_path
-      #   return
-      # end
+      unless @product.user_id==current_account.accountable_id
+        redirect_to owner_path
+        return
+      end
       @product.destroy
       redirect_to owner_path
     end

@@ -8,8 +8,8 @@
             <%= renter.account.name%>
         </li>
         <%= link_to "View Profile", view_profile_path(renter) %> <br>
-        <%= link_to "Accept", accept_path(renter) %> <br>
-        <%= link_to "Reject", reject_path(renter) %> <br>
+        <%= link_to "Accept", accept_path(renterid:renter.id,productid:@product.id) %> <br>
+        <%= link_to "Reject", reject_path(renterid:renter.id,productid:@product.id) %> <br>
       </div>
     <% end %>
   </ul>

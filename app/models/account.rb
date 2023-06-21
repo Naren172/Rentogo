@@ -4,6 +4,8 @@ class Account < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :accountable, polymorphic: true
+
+
   def user?
     if(accountable_type=="User")
       true
@@ -19,6 +21,8 @@ class Account < ApplicationRecord
       false
     end
   end
+
+  
   validates :name, length: {minimum:5}
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP ,message:"Invalid Email" }
   validates :password, length: {minimum:6,message:"length must be a minimum of 6"}

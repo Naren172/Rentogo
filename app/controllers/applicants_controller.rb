@@ -24,8 +24,8 @@ class ApplicantsController < ApplicationController
     end
 
     def view       
-        product=Product.find(params[:id])
-        applicants=product.applicants
+        @product=Product.find(params[:id])
+        applicants=@product.applicants
         @renter=[]
         applicants.each do |applicant|
             if(applicant.status!="Rejected")
@@ -36,7 +36,7 @@ class ApplicantsController < ApplicationController
     end
 
     def accept
-        applicant=Applicant.find_by(renter_id:params[:id])
+        applicant=Applicant.find_by(renter_id:params[:renterid],product_id:params[:productid])
         product=Product.find(applicant.product_id)
         unless product.user_id==current_account.accountable_id
             redirect_to owner_path
@@ -51,12 +51,11 @@ class ApplicantsController < ApplicationController
         applicant.save
         product=Product.find(applicant.product_id)
         product.status="Unavailable"
-        redirect_to add_path(productid:product.id,renterid:params[:id])
-
+        redirect_to add_path(productid:product.id,renterid:params[:renterid])
     end
 
     def reject 
-        applicant=Applicant.find_by(renter_id:params[:id])
+        applicant=Applicant.find_by(renter_id:params[:renterid],product_id:params[:productid])
         product=Product.find(applicant.product_id)
         unless product.user_id==current_account.accountable_id
             redirect_to owner_path

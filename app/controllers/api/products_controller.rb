@@ -32,7 +32,7 @@ class Api::ProductsController < Api::ApiController
         if product.save
             render json: product ,status: :ok
         else
-            render json: { message: "Error while saving"}, status: :not_found
+            render json: { message: "Error while saving"}, status: :unprocessable_entity
         end
     end
 

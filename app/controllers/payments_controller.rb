@@ -8,16 +8,16 @@ class PaymentsController < ApplicationController
     end
 
     def create
-        @payment=PaymentHistory.new
-        @payment.cardnumber=params[:cardnumber]
-        @payment.expiry=params[:expiry]
-        @payment.cvc=params[:cvc]
-        @payment.amount=params[:amount]
+        payment=PaymentHistory.new
+        payment.cardnumber=params[:cardnumber]
+        payment.expiry=params[:expiry]
+        payment.cvc=params[:cvc]
+        payment.amount=params[:amount]
         rental=RentalHistory.find(params[:rental_id])
         product=Product.find(rental.product_id)
         product.applicants.delete_all   
-        @payment.save
-        redirect_to delivery_path(paymentid:@payment.id,rentalid:params[:rental_id])
+        payment.save
+        redirect_to delivery_path(paymentid:payment.id,rentalid:params[:rental_id])
     end
 
     def show

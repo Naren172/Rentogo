@@ -2,10 +2,9 @@ class MainController < ApplicationController
     before_action :authenticate_account!
     before_action :is_renter?
     def index
-        
         @products=Product.all
-        @renter=Renter.find(current_account.accountable_id)
-        @applicants=Applicant.where(renter_id:@renter.id)
+        renter=Renter.find(current_account.accountable_id)
+        @applicants=Applicant.where(renter_id:renter.id)
 
     end
 

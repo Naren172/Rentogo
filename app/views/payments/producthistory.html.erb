@@ -1,6 +1,6 @@
 <%= render partial: "shared/navbar" %>
 <center>
-  <h1>Your Payment History</h1>
+  <h1>Product Payment History</h1>
   <ul>
     <% @rentals.each do |rental| %>
     <div class="card">
@@ -9,7 +9,7 @@
         Renter: <a href="/renterrating/<%= renter.id%>"><%=renter.account.name %></a><br>
         Amount: <%=rental.payment_history.amount%>
       <%end%>
-    </div>
+    </div> <br><br>
     <% end %>
   </ul>
 </center>
