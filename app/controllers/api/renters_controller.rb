@@ -1,9 +1,7 @@
 class Api::RentersController < Api::ApiController
-
-    # before_action :authenticate_account!
-    # before_action :is_owner?
+?    # before_action :is_owner?
     def view
-        renter=Renter.find(params[:id])
+        renter=Renter.find_by(id:params[:id])
         ratings=renter.ratings
         if(ratings.length>0)
             averagerating=0
@@ -18,19 +16,19 @@ class Api::RentersController < Api::ApiController
     end
 
     def rating
-        renter=Renter.find(params[:id])
-        render json:renter, status: :ok
-       
+        renter=Renter.find_by(id:params[:id])
+        if renter
+            render json:renter, status: :ok
+        else
+            render json:{message:"No renter found"}, status: :not_found
+        end
     end
+
 
     private
     def is_owner?
-        unless account_signed_in? && current_account.user?
-            if account_signed_in?
-                redirect_to renterindex_path
-            else
-                redirect_to new_account_session_path
-            end
+        unless current_account && current_account.user?
+            render json: {message: "You are not authorized to view this page"} , status: :unauthorized
         end
     end
 end

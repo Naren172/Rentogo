@@ -4,9 +4,9 @@ class RentalController < ApplicationController
     
     def new
         rental=RentalHistory.new
-        product=Product.find(params[:productid])
+        product=Product.find_by(id:params[:productid])
         product.rental_histories<<rental
-        renter=Renter.find(params[:renterid])
+        renter=Renter.find_by(id:params[:renterid])
         renter.rental_histories<<rental
         product.update(status:"Unavailable")
         rental.save
@@ -16,7 +16,7 @@ class RentalController < ApplicationController
     end
 
     def index
-        renter=Renter.find(current_account.accountable_id)
+        renter=Renter.find_by(id:current_account.accountable_id)
         @rentals=renter.rental_histories
     end
     

@@ -3,7 +3,7 @@ class RentersController < ApplicationController
     before_action :authenticate_account!
     before_action :is_owner?
     def view
-        @renter=Renter.find(params[:id])
+        @renter=Renter.find_by(id:params[:id])
         @ratings=@renter.ratings
         if(@ratings.length>0)
             @averagerating=0
@@ -17,7 +17,7 @@ class RentersController < ApplicationController
     end
 
     def rating
-        @renter=Renter.find(params[:id])
+        @renter=Renter.find_by(id:params[:id])
        
     end
 

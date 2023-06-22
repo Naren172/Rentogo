@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :accounts, controllers:{
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   get "ownerindex", to:"index#owner"
   get "renterindex", to:"index#renter"
   get "owner", to:"index#owner"
+
 
   get "renter", to: "main#index"
   get "showproduct/:id", to:"main#show", as:'showproduct'
@@ -90,7 +92,11 @@ Rails.application.routes.draw do
   get "rrating/:id", to:"ratings#newrenter" ,as:'rrating'
   post "rratings/:id", to:"ratings#createuser" ,as:'rratings'
   post "ratings", to:"ratings#createproduct" ,as:'ratings'
-  
+
+  get "getallusers", to:"main#getallusers"
+  get "getallrenters", to:"main#getallrenters"
+  get "landing", to:"main#landing"
+
   resources :products
   end
 end

@@ -1,10 +1,9 @@
 class Api::PaymentsController < Api::ApiController
-    # before_action :authenticate_account!
-    # before_action :is_renter?, except: [:producthistory]
+    before_action :is_renter?, except: [:producthistory]
     def new
         payment=PaymentHistory.new
-        product=Product.find(params[:product])
-        rental=RentalHistory.find(params[:rental])
+        product=Product.find_by(id:params[:product])
+        rental=RentalHistory.find_by(id:params[:rental])
     end
 
     def create
@@ -13,8 +12,8 @@ class Api::PaymentsController < Api::ApiController
         payment.expiry=params[:expiry]
         payment.cvc=params[:cvc]
         payment.amount=params[:amount]
-        rental=RentalHistory.find(params[:rental_id])
-        product=Product.find(rental.product_id)
+        rental=RentalHistory.find_by(id:params[:rental_id])
+        product=Product.find_by(id:rental.product_id)
         product.applicants.delete_all   
         if payment.save
             render json: payment ,status: :ok
@@ -22,37 +21,41 @@ class Api::PaymentsController < Api::ApiController
             render json: { message: "Error while saving"}, status: :unprocessable_entity
 
         end
-    
-        # redirect_to delivery_path(paymentid:payment.id,rentalid:params[:rental_id])
     end
 
     def show
-        # account=current_account
-        renter=Renter.find_by(id:params[:renter_id])
+        account=current_account
+        renter=Renter.find_by(id:account.accountable_id)
         rentals=renter.rental_histories
-        render json: rentals ,status: :ok
-
+        if rentals
+            render json: rentals ,status: :ok
+        else
+            render json: { message: "Rental history not found"}, status: :not_found
+        end
     end
 
     def showproduct
-        product=Product.find(params[:id])
-        render json: product, status: :ok
+        product=Product.find_by(id:params[:id])
+        if product
+            render json: product, status: :ok
+        else
+            render json:{message:"Product not found!"}, status: :not_found
+        end
     end
 
     def producthistory
-        product=Product.find(params[:id])
+        product=Product.find_by(id:params[:id])
         rentals=product.rental_histories
-        render json: rentals, status: :ok
+        if rentals
+            render json: rentals, status: :ok
+        else
+            render json: {message:"Rental not found"}, status: :not_found
     end
 
     private
     def is_renter?
-        unless account_signed_in? && current_account.renter?
-            if account_signed_in?
-                redirect_to owner_path
-            else
-                redirect_to new_account_session_path
-            end
+        unless current_account&& current_account.renter?
+            render json: {message: "You are not authorized to view this page"} , status: :unauthorized
         end
     end
 end

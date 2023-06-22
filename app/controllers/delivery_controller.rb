@@ -3,8 +3,8 @@ class DeliveryController < ApplicationController
     before_action :is_renter?
     def new
         @delivery=Delivery.new
-        @payment=PaymentHistory.find(params[:paymentid])
-        @rental=RentalHistory.find(params[:rentalid])
+        @payment=PaymentHistory.find_by(id:params[:paymentid])
+        @rental=RentalHistory.find_by(id:params[:rentalid])
     end
 
     def create

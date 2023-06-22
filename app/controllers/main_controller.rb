@@ -3,13 +3,13 @@ class MainController < ApplicationController
     before_action :is_renter?
     def index
         @products=Product.all
-        renter=Renter.find(current_account.accountable_id)
+        renter=Renter.find_by(id:current_account.accountable_id)
         @applicants=Applicant.where(renter_id:renter.id)
 
     end
 
     def show
-        @product=Product.find(params[:id])
+        @product=Product.find_by(id:params[:id])
         @ratings=@product.ratings
         if(@ratings.length>0)
             @averagerating=0

@@ -3,12 +3,12 @@ class ProductsController < ApplicationController
     before_action :is_owner?
 
     def index
-      user=User.find(current_account.accountable_id)
+      user=User.find_by(id:current_account.accountable_id)
       @products=user.products
     end
 
     def show
-      @product=Product.find(params[:id])
+      @product=Product.find_by(id:params[:id])
     end
 
     def new
@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
 
     def create
       account=current_account
-      user=User.find(account.accountable_id)
+      user=User.find_by(id:account.accountable_id)
       userdata=product_params
       image=userdata["image"]
       userdata.delete("image")
@@ -31,11 +31,11 @@ class ProductsController < ApplicationController
     end
 
     def edit
-      @product = Product.find(params[:id])
+      @product = Product.find_by(id:params[:id])
     end
 
     def update
-      product = Product.find(params[:id])
+      product = Product.find_by(id:params[:id])
       unless product.user_id==current_account.accountable_id
         redirect_to owner_path
         return
@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
     end
 
     def destroy
-      @product = Product.find(params[:id])
+      @product = Product.find_by(id:params[:id])
       unless @product.user_id==current_account.accountable_id
         redirect_to owner_path
         return

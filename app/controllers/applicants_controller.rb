@@ -5,9 +5,9 @@ class ApplicantsController < ApplicationController
         applicant=Applicant.new
         applicant.status="Applied"
         account=current_account
-        renter=Renter.find(current_account.accountable_id)
+        renter=Renter.find_by(id:current_account.accountable_id)
         applicant.renter_id=renter.id
-        product=Product.find(params[:id])
+        product=Product.find_by(id:params[:id])
         product.applicants<<applicant
         applicant.save
         product.save
@@ -15,11 +15,11 @@ class ApplicantsController < ApplicationController
     end
 
     def show
-        @product=Product.find(params[:id])
+        @product=Product.find_by(id:params[:id])
     end
 
     def index
-        renter=Renter.find(current_account.accountable_id)
+        renter=Renter.find_by(id:current_account.accountable_id)
         @applicants=Applicant.where(renter_id:renter.id)
     end
 
@@ -29,7 +29,7 @@ class ApplicantsController < ApplicationController
         @renter=[]
         applicants.each do |applicant|
             if(applicant.status!="Rejected")
-                @renter<<Renter.find(applicant.renter_id)
+                @renter<<Renter.find_by(id:applicant.renter_id)
             end
         # @applicants=Applicant.where(product_id:product.id)
         end
@@ -37,7 +37,7 @@ class ApplicantsController < ApplicationController
 
     def accept
         applicant=Applicant.find_by(renter_id:params[:renterid],product_id:params[:productid])
-        product=Product.find(applicant.product_id)
+        product=Product.find_by(id:applicant.product_id)
         unless product.user_id==current_account.accountable_id
             redirect_to owner_path
             return
@@ -49,14 +49,14 @@ class ApplicantsController < ApplicationController
         end
         applicant.status="Accepted" 
         applicant.save
-        product=Product.find(applicant.product_id)
+        product=Product.find_by(id:applicant.product_id)
         product.status="Unavailable"
         redirect_to add_path(productid:product.id,renterid:params[:renterid])
     end
 
     def reject 
         applicant=Applicant.find_by(renter_id:params[:renterid],product_id:params[:productid])
-        product=Product.find(applicant.product_id)
+        product=Product.find_by(id:applicant.product_id)
         unless product.user_id==current_account.accountable_id
             redirect_to owner_path
             return
@@ -67,8 +67,8 @@ class ApplicantsController < ApplicationController
     end
 
     def destroy
-        applicant=Applicant.find(params[:id])
-        product=Product.find(applicant.product_id)
+        applicant=Applicant.find_by(id:params[:id])
+        product=Product.find_by(id:applicant.product_id)
         unless applicant.renter_id==current_account.accountable_id
             redirect_to renterindex_path
             return
