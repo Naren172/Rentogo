@@ -89,7 +89,7 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
     if resource.user?
       owner_path
     elsif resource.renter?
-      renter_path
+      renterindex_path
     end
   end
 

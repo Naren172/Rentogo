@@ -9,6 +9,11 @@ class ProductsController < ApplicationController
 
     def show
       @product=Product.find_by(id:params[:id])
+      if @product
+        @product
+      else
+        redirect_to ownerindex_path, error:"Not Found"
+      end
     end
 
     def new
@@ -32,36 +37,51 @@ class ProductsController < ApplicationController
 
     def edit
       @product = Product.find_by(id:params[:id])
+      if @product
+        @product
+      else
+        redirect_to products_path, error:"Not Found"
+
+      end
     end
 
     def update
       product = Product.find_by(id:params[:id])
-      unless product.user_id==current_account.accountable_id
-        redirect_to owner_path
-        return
-      end
-      puts(product)
-      if product.update(product_params)
-        redirect_to product_path
+      if product
+        unless product.user_id==current_account.accountable_id
+          redirect_to owner_path
+          return
+        end
+        if product.update(product_params)
+          redirect_to product_path
+        else
+          render :edit, status: :unprocessable_entity
+        end
       else
-        render :edit, status: :unprocessable_entity
+        redirect_to ownerindex_path, error:"Not Found"
       end
     end
+     
 
     def destroy
       @product = Product.find_by(id:params[:id])
-      unless @product.user_id==current_account.accountable_id
+      if @product
+        unless @product.user_id==current_account.accountable_id
+          redirect_to owner_path
+          return
+        end
+        @product.destroy
         redirect_to owner_path
-        return
+      else
+        redirect_to ownerindex_path, error:"Not Found"
       end
-      @product.destroy
-      redirect_to owner_path
     end
+
 
     def product_params
       params.require(:product).permit(:name,:rent,:status,:image,:description)
     end
-
+   
     private
     def is_owner?
         unless account_signed_in? && current_account.user?

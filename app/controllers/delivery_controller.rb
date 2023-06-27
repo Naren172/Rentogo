@@ -4,7 +4,15 @@ class DeliveryController < ApplicationController
     def new
         @delivery=Delivery.new
         @payment=PaymentHistory.find_by(id:params[:paymentid])
-        @rental=RentalHistory.find_by(id:params[:rentalid])
+        if @payment
+            @rental=RentalHistory.find_by(id:params[:rentalid])
+            if @rental
+            else
+                redirect_to renterindex_path
+            end
+        else
+            redirect_to renterindex_path
+        end
     end
 
     def create

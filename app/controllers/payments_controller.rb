@@ -1,10 +1,20 @@
 class PaymentsController < ApplicationController
     before_action :authenticate_account!
     before_action :is_renter?, except: [:producthistory]
+    before_action :is_owner?, only: [:producthistory]
+
     def new
         @payment=PaymentHistory.new
         @product=Product.find_by(id:params[:product])
-        @rental=RentalHistory.find_by(id:params[:rental])
+        if @product
+            @rental=RentalHistory.find_by(id:params[:rental])
+            if @rental
+            else
+            redirect_to renterindex_path, error:"Not found"
+            end
+        else
+            redirect_to renterindex_path, error:"Not found"
+        end
     end
 
     def create
@@ -14,25 +24,38 @@ class PaymentsController < ApplicationController
         payment.cvc=params[:cvc]
         payment.amount=params[:amount]
         rental=RentalHistory.find_by(id:params[:rental_id])
-        product=Product.find_by(id:rental.product_id)
-        product.applicants.delete_all   
-        payment.save
-        redirect_to delivery_path(paymentid:payment.id,rentalid:params[:rental_id])
+        if rental
+            product=Product.find_by(id:rental.product_id)
+            product.applicants.delete_all   
+            payment.save
+            redirect_to delivery_path(paymentid:payment.id,rentalid:params[:rental_id])
+        else
+            redirect_to renterindex_path, error:"Not found"
+        end
     end
 
     def show
         account=current_account
         renter=Renter.find_by(id:account.accountable_id)
-        @rentals=renter.rental_histories 
+        @rentals=renter.rental_histories
+
     end
 
     def showproduct
         @product=Product.find_by(id:params[:id])
+        if @product
+        else
+            redirect_to renterindex_path, error:"not found"
+        end
     end
 
     def producthistory
         product=Product.find_by(id:params[:id])
-        @rentals=product.rental_histories
+        if product
+            @rentals=product.rental_histories
+        else
+            redirect_to owner_path, error:"Not found"
+        end
     end
 
     private
@@ -43,6 +66,16 @@ class PaymentsController < ApplicationController
             else
                 redirect_to new_account_session_path
             end
+        end
+    end
+
+    def is_owner?
+        unless account_signed_in? && current_account.user?
+          if account_signed_in?
+              redirect_to renterindex_path
+          else
+              redirect_to new_account_session_path
+          end
         end
     end
 end

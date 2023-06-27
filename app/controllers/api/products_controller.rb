@@ -54,7 +54,7 @@ class Api::ProductsController < Api::ApiController
         if product.update(product_params)
             render json: { message: "Updated successfully"}, status: :ok
         else
-            render json: { message: "Error while updating"}, status: :not_found
+            render json: { message: "Error while updating"}, status: :not_modified
         end
     end
 
@@ -67,7 +67,7 @@ class Api::ProductsController < Api::ApiController
         if product.destroy
             render json: { message: "Deleted successfully"}, status: :ok
         else
-            render json: { message: "Error while deleting"}, status: :not_found
+            render json: { message: "Error while deleting"}, status: :not_modified
         end
 
     end

@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 
   get "rating/:id", to:"ratings#newproduct" ,as:'rating'
   get "rrating/:id", to:"ratings#newrenter" ,as:'rrating'
-  post "rratings/:id", to:"ratings#createuser" ,as:'rratings'
+  post "rratings", to:"ratings#createuser" ,as:'rratings'
   post "ratings", to:"ratings#createproduct" ,as:'ratings'
   
   resources :products
@@ -90,11 +90,12 @@ Rails.application.routes.draw do
 
   get "rating/:id", to:"ratings#newproduct" ,as:'rating'
   get "rrating/:id", to:"ratings#newrenter" ,as:'rrating'
-  post "rratings/:id", to:"ratings#createuser" ,as:'rratings'
+  post "rratings", to:"ratings#createuser" ,as:'rratings'
   post "ratings", to:"ratings#createproduct" ,as:'ratings'
 
   get "getallusers", to:"main#getallusers"
   get "getallrenters", to:"main#getallrenters"
+  get "productratings/:id", to:"ratings#productrating" ,as:'productratings'
   get "landing", to:"main#landing"
 
   resources :products

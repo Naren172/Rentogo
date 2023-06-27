@@ -39,6 +39,17 @@ class Api::RatingsController < Api::ApiController
         end
     end
 
+    #custom API 
+    def productrating
+        product=Product.find_by(id:params[:id])
+        ratings=product.ratings
+        if ratings
+            render json: ratings, status: :ok
+        else
+            render json: {message:"Product not found!"}, status: :not_found
+        end
+    end
+
     def is_owner?
         unless current_account && current_account.user?
             render json: {message: "You are not authorized to view this page"} , status: :unauthorized

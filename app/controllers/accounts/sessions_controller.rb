@@ -18,6 +18,14 @@ class Accounts::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def after_sign_in_path_for(resource)
+    if resource.user?
+      owner_path
+    elsif resource.renter?
+      renterindex_path
+    end
+  end
+
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.

@@ -19,7 +19,7 @@ ActiveAdmin.register User do
     permitted << :other if params[:action] == 'create' && current_user.admin?
     permitted
   end
-  filter :address , :as => :select, :collection => User.pluck(:address).uniq
+  # filter :address , :as => :select, :collection => User.pluck(:address).uniq
   filter :account
 end
 

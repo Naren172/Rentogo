@@ -1,7 +1,7 @@
 class IndexController < ApplicationController
     before_action :authenticate_account!
-    before_action :is_renter? , except: [:owner]
-    before_action :is_owner? , except: [:renter]
+    before_action :is_renter? , only: [:renter]
+    before_action :is_owner? , only: [:owner]
     def renter
     end
 

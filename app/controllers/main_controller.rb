@@ -10,15 +10,19 @@ class MainController < ApplicationController
 
     def show
         @product=Product.find_by(id:params[:id])
-        @ratings=@product.ratings
-        if(@ratings.length>0)
-            @averagerating=0
-            n=0
-            @ratings.each do |rating|
-                @averagerating+=rating.rating
-                n+=1
+        if @product
+            @ratings=@product.ratings
+            if(@ratings.length>0)
+                @averagerating=0
+                n=0
+                @ratings.each do |rating|
+                    @averagerating+=rating.rating
+                    n+=1
+                end
+                @averagerating/=n
             end
-            @averagerating/=n
+        else
+            redirect_to renterindex_path, error:"not found"
         end
     end
 
