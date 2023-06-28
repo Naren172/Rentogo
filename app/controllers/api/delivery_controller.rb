@@ -1,11 +1,6 @@
 class Api::DeliveryController <  Api::ApiController
     before_action :is_renter?
-    def new
-        delivery=Delivery.new
-        payment=PaymentHistory.find_by(id:params[:paymentid])
-        rental=RentalHistory.find_by(id:params[:rentalid])
-    end
-
+    
     def create
         delivery=Delivery.new
         delivery.location=params[:location]

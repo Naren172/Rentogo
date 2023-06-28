@@ -22,11 +22,6 @@ class Api::ProductsController < Api::ApiController
         end
     end
 
-    def new
-        product = Product.new
-        render json: product ,status: :ok
-    end
-
     def create
         productdata=product_params
         image=productdata["image"]
@@ -41,33 +36,38 @@ class Api::ProductsController < Api::ApiController
         end
     end
 
-    def edit
-        product = Product.find_by(id:params[:id])
-    end
-
     def update
         product = Product.find_by(id:params[:id])
-        unless product.user_id==current_account.accountable_id
-            render json: { message: "You are not authorized for this action"} , status: :forbidden
-            return
-        end
-        if product.update(product_params)
-            render json: { message: "Updated successfully"}, status: :ok
+        if product
+            unless product.user_id==current_account.accountable_id
+                render json: { message: "You are not authorized for this action"} , status: :forbidden
+                return
+            end
+            if product.update(product_params)
+                render json: { message: "Updated successfully"}, status: :ok
+            else
+                render json: { message: "Error while updating"}, status: :not_modified
+            end
         else
-            render json: { message: "Error while updating"}, status: :not_modified
+            render json: { message: "No product Found"}, status: :not_found
         end
+
     end
 
     def destroy
         product = Product.find_by(id:params[:id])
-        unless product.user_id==current_account.accountable_id
-            render json: { message: "You are not authorized for this action"} , status: :forbidden
-            return
-        end
-        if product.destroy
-            render json: { message: "Deleted successfully"}, status: :ok
+        if product
+            unless product.user_id==current_account.accountable_id
+                render json: { message: "You are not authorized for this action"} , status: :forbidden
+                return
+            end
+            if product.destroy
+                render json: { message: "Deleted successfully"}, status: :ok
+            else
+                render json: { message: "Error while deleting"}, status: :not_modified
+            end
         else
-            render json: { message: "Error while deleting"}, status: :not_modified
+            render json: { message: "No Product Found"}, status: :not_found
         end
 
     end

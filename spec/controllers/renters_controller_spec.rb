@@ -27,13 +27,23 @@ RSpec.describe RentersController, type: :controller do
             end
         end
 
-        context "when renter_account is signed in with invalid PARAMS" do
+        context "when user_account is signed in with invalid PARAMS" do
             before do  
                 sign_in user_account
                 get :view, params:{id:"A"}
             end                     
             it "redirects to owner index page" do
                 expect(response).to redirect_to(owner_path)
+            end
+        end
+
+        context "when user_account is signed in with invalid PARAMS" do
+            before do  
+                sign_in user_account
+                get :view, params:{id:renter.id}
+            end                     
+            it "redirects to the template" do
+                expect(response).to render_template(:view)
             end
         end
 
@@ -60,13 +70,23 @@ RSpec.describe RentersController, type: :controller do
             end
         end
 
-        context "when renter_account is signed in with invalid PARAMS" do
+        context "when user_account is signed in with invalid PARAMS" do
             before do  
                 sign_in user_account
                 get :rating, params:{id:"A"}
             end                     
             it "redirects to owner index page" do
                 expect(response).to redirect_to(owner_path)
+            end
+        end
+
+        context "when user_account is signed in" do
+            before do  
+                sign_in user_account
+                get :rating, params:{id:renter.id}
+            end                     
+            it "redirects to the template" do
+                expect(response).to render_template(:rating)
             end
         end
 

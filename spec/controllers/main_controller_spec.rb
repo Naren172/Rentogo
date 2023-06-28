@@ -8,9 +8,7 @@ RSpec.describe MainController, type: :controller do
     let(:renter_account) {create(:account,:for_renter, accountable: renter)}
     
     let!(:product) {create(:product,user:user)}
-    let(:rental) {create(:rental_history,product:product,renter:renter)}
-    let(:payment) {create(:payment_history)}
-
+   
     describe "get main#index" do
         context "when renter is not signed in" do
             before do

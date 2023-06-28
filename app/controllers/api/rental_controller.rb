@@ -4,16 +4,24 @@ class Api::RentalController < Api::ApiController
     def new
         rental=RentalHistory.new
         product=Product.find_by(id:params[:productid])
-        product.rental_histories<<rental
-        renter=Renter.find_by(id:params[:renterid])
-        renter.rental_histories<<rental
-        product.update(status:"Unavailable")
-        product.save
-        renter.save
-        if rental.save
-            render json: rental , status: :ok
+        if product
+            product.rental_histories<<rental
+            renter=Renter.find_by(id:params[:renterid])
+            if renter
+                renter.rental_histories<<rental
+                product.update(status:"Unavailable")
+                product.save
+                renter.save
+                if rental.save
+                    render json: rental , status: :ok
+                else
+                    render json: {message:"Error while saving"}, status: :unprocessable_entity
+                end
+            else
+                render json: {message:"No renter found"}, status: :not_found
+            end
         else
-            render json: {message:"Error while saving"}, status: :unprocessable_entity
+            render json: {message:"No product found"}, status: :not_found
         end
     end
 

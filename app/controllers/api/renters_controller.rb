@@ -1,18 +1,23 @@
 class Api::RentersController < Api::ApiController
-?    # before_action :is_owner?
+    before_action :is_owner?
     def view
         renter=Renter.find_by(id:params[:id])
-        ratings=renter.ratings
-        if(ratings.length>0)
-            averagerating=0
-            n=0
-            ratings.each do |rating|
-                averagerating+=rating.rating
-                n+=1 
+        if renter
+            ratings=renter.ratings
+            if(ratings.length>0)
+                averagerating=0
+                n=0
+                ratings.each do |rating|
+                    averagerating+=rating.rating
+                    n+=1 
+                end
+                averagerating/=n
             end
-            averagerating/=n
+            render json: {renter:renter, ratings:ratings, averagerating:averagerating}, status: :ok
+        else
+            render json: {message:"No renter found"}, status: :not_found
         end
-        render json: {renter:renter, ratings:ratings, averagerating:averagerating}, status: :ok
+
     end
 
     def rating

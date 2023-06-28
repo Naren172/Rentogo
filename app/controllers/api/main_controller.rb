@@ -8,17 +8,21 @@ class Api::MainController <  Api::ApiController
 
     def show
         product=Product.find_by(id:params[:id])
-        ratings=product.ratings
-        if(ratings.length>0)
-            averagerating=0
-            n=0
-            ratings.each do |rating|
-                averagerating+=rating.rating
-                n+=1
+        if product
+            ratings=product.ratings
+            if(ratings.length>0)
+                averagerating=0
+                n=0
+                ratings.each do |rating|
+                    averagerating+=rating.rating
+                    n+=1
+                end
+                averagerating/=n
             end
-            averagerating/=n
+            render json:{product: product,ratings: ratings, averagerating: averagerating}, status: :ok
+        else
+            render json: { message: "No product Found"}, status: :not_found
         end
-        render json:{product: product,ratings: ratings, averagerating: averagerating}, status: :ok
     end
 
     # custom API's

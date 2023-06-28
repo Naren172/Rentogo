@@ -31,6 +31,16 @@ RSpec.describe ProductsController, type: :controller do
                 expect(response).to redirect_to(renterindex_path)
             end
         end
+
+        context "when user is signed in" do
+            before do  
+                sign_in user_account
+                get :index
+            end                     
+            it "redirects to the template" do
+                expect(response).to render_template(:index)
+            end
+        end
     end
 
     describe "get /products#show" do
@@ -50,6 +60,16 @@ RSpec.describe ProductsController, type: :controller do
             end                     
             it "redirects to renter index page" do
                 expect(response).to redirect_to(renterindex_path)
+            end
+        end
+
+        context "when renter_account is signed in" do
+            before do  
+                sign_in user_account
+                get :show, params:{id:product.id}
+            end                     
+            it "redirects to the template" do
+                expect(response).to render_template(:show)
             end
         end
     end
@@ -221,7 +241,5 @@ RSpec.describe ProductsController, type: :controller do
         end
 
     end
-    
-
    
 end
