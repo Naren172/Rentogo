@@ -4,6 +4,5 @@ FactoryBot.define do
     cvc {"123"}
     amount {1234}
     expiry {"Wed, 21 Jun 2023"}
-    
   end
 end

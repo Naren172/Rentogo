@@ -21,13 +21,13 @@ class Account < ApplicationRecord
       false
     end
   end
-
+  
   
   validates :name, length: {minimum:5,maximum:20}
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP ,message:"Invalid Email" }
   validates :password, length: {minimum:6,message:"length must be a minimum of 6"}
 
-
+  
   def self.authenticate(email,password)
     account = Account.find_for_authentication(email:email)
     account&.valid_password?(password)? account : nil

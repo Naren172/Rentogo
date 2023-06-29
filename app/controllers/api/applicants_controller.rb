@@ -5,7 +5,7 @@ class Api::ApplicantsController < Api::ApiController
     def new
         applicant=Applicant.new
         applicant.status="Applied"
-        renter=Renter.find(current_account.accountable_id)
+        renter=Renter.find_by(id:current_account.accountable_id)
         applicant.renter_id=renter.id
         product=Product.find_by(id:params[:id])
         if product
@@ -47,7 +47,7 @@ class Api::ApplicantsController < Api::ApiController
             applicants=product.applicants
             renter=[]
             applicants.each do |applicant|
-                if(applicant.status!="Rejected")
+                if(applicant.status!="Rejected"&&applicant.status!="Accepted")
                     renter<<Renter.find_by(id:applicant.renter_id)
                 end
             end
@@ -102,7 +102,7 @@ class Api::ApplicantsController < Api::ApiController
     def destroy
         applicant=Applicant.find_by(id:params[:id])
         if applicant
-            product=Product.find(applicant.product_id)
+            product=Product.find_by(id:applicant.product_id)
             unless applicant.renter_id==current_account.accountable_id
                 render json: { message: "You are not authorized for this action"} , status: :forbidden
                 return

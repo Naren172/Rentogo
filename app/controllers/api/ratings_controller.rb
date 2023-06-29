@@ -47,9 +47,7 @@ class Api::RatingsController < Api::ApiController
         if product
             ratings=product.ratings
             if ratings
-                rating=ratings.pluck(:id,:rating,:comment)
-                response = { rating: rating.map { |id,rating,comment| { id: id, rating: rating, comment: comment } } }   
-                render json: response, status: :ok
+                render json: ratings, status: :ok
             else
                 render json: {message:"no ratings for the product!"}, status: :not_found
             end

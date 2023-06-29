@@ -47,8 +47,6 @@ Rails.application.routes.draw do
   resources :products
 
 
-
-
   namespace :api, default: {format: :json} do
     devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

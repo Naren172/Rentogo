@@ -3,6 +3,14 @@ class MainController < ApplicationController
     before_action :is_renter?
     def index
         @products=Product.all
+        if params[:rent1] and params[:rent1].length!=0
+            @products = Product.where( "rent > ?", params[:rent1])
+           
+        end
+        if params[:rent] and params[:rent].length!=0
+            @products = @products.where( "rent < ?", params[:rent])
+           
+        end
         renter=Renter.find_by(id:current_account.accountable_id)
         @applicants=Applicant.where(renter_id:renter.id)
 

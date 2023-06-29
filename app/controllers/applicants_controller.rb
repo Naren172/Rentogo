@@ -38,7 +38,7 @@ class ApplicantsController < ApplicationController
             applicants=@product.applicants
             @renter=[]
             applicants.each do |applicant|
-                if(applicant.status!="Rejected")
+                if(applicant.status!="Rejected"&&applicant.status!="Accepted")
                     @renter<<Renter.find_by(id:applicant.renter_id)
                 end
             # @applicants=Applicant.where(product_id:product.id)

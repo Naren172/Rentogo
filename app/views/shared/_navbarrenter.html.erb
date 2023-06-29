@@ -12,13 +12,10 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li><a href="http://127.0.0.1:3000/renter" style="color: black;">Show All Products</a></li>
-       
         <li><a href="http://127.0.0.1:3000/applications" style="color: black;">Applications</a></li>
         <li><a href="http://127.0.0.1:3000/rentershow" style="color: black;">Rental History</a></li>
         <li><a href="http://127.0.0.1:3000/paymenthistory" style="color: black;">Payments</a></li>
-
       </ul>
-      
       <ul class="nav navbar-nav navbar-right" style="padding: 2%;">
       <% if account_signed_in?%>
         <%= button_to destroy_account_session_path,method: :delete  do %>

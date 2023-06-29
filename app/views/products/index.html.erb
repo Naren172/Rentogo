@@ -1,5 +1,7 @@
 <%= render partial: "shared/navbar" %>
-<center>
+<%
+=begin%>
+ <center>
   <h1>Products</h1>
   <ul>
     <% @products.each do |product| %>
@@ -14,5 +16,30 @@
       <br><br>
     <% end %>
   </ul>
-</center>
-           
+</center> 
+<%
+=end%>
+<div class="container">
+  <% @products.each do |product| %>
+      <div class="row">
+        <div class="col-md-6" style="top:20%;">
+        <br><br><br><br>
+          <div id="myCarousel" class="carousel slide" data-ride="carousel"> 
+              <center> 
+                <div class="item active">
+                  <img src="<%=(url_for(product.image))%>" alt="Los Angeles" style="width:50%;height:50%;">
+                </div>
+              </center>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h1 style="font-size: 18px;">Details</h1>
+          <p><%=product.name%></p>
+          <li style="background-color: #FF5733;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><a href="/products/<%= product.id %>">View</a></center></li>
+          <br>
+          <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+          <br>
+        </div>
+      </div>
+  <%end%>
+</div>

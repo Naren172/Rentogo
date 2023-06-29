@@ -26,7 +26,9 @@ class ProductsController < ApplicationController
       userdata=product_params
       image=userdata["image"]
       userdata.delete("image")
-      @product=user.products.create(userdata)
+      @product=Product.create(userdata)
+      user.products<<@product
+      # @product=user.products.create(userdata)
       @product.image.attach(image)
       if @product.save
         redirect_to owner_path

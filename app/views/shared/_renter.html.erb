@@ -1,0 +1,41 @@
+<nav class="navbar navbar-inverse" style="background-color: white;border-style: none;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <br>
+      <a class="navbar-brand" href="http://127.0.0.1:3000/renterindex"><div class="logo" style="color: black;">REN<span style="color: #FF5733;">T</span>OGO</div></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="http://127.0.0.1:3000/renter" style="color: black;">Show All Products</a></li>
+        <li><a href="http://127.0.0.1:3000/applications" style="color: black;">Applications</a></li>
+        <li><a href="http://127.0.0.1:3000/rentershow" style="color: black;">Rental History</a></li>
+        <li><a href="http://127.0.0.1:3000/paymenthistory" style="color: black;">Payments</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" style="padding: 2%;">
+      
+        <%=form_with url:renter_path,method: :get do |f|%>
+            <div class="row">
+                <div class="col-md-6">
+                <%=f.number_field :rent,placeholder:"Amount less than"%>
+            </div>
+            <div class="col-md-6">
+                <%=f.submit "Search",class:"btn btn-primary"%> 
+                 
+            </div>
+            </div>
+        <%end%>
+        <% if account_signed_in?%>
+        <%= button_to destroy_account_session_path,method: :delete  do %>
+            <i class="i fa fa-user"></i>
+        <%end%>
+      <%end%>
+      </ul>
+    </div>
+  </div>
+</nav>
+ 

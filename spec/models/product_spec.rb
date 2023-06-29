@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
 
-
-
   describe "association" do
 
     context "belongs_to" do
@@ -27,9 +25,17 @@ RSpec.describe Product, type: :model do
     
   end
 
-
-
-
+  describe "callbacks" do
+      context "set_available" do
+        let(:product) {build(:product)}
+        before do
+          product.save
+        end
+        it "be equal to Available" do
+          expect(product.status).to eq("Available")
+        end
+      end
+   end
 
   describe "rent" do
 
@@ -143,32 +149,7 @@ RSpec.describe Product, type: :model do
 
   end
 
-  describe "status" do
-    before(:each) do
-      product.validate
-    end
-
-    context "when status is present" do
-      let(:product) {build(:product,status:"Available")}
-      it "doesn't throw any error" do
-        expect(product.errors).to_not include(:status)
-      end
-    end
-
-    context "when status is not present" do
-      let(:product) {build(:product,status:nil)}
-      it "throws an error" do
-        expect(product.errors).to include(:status)
-      end
-    end
-
-    context "when status is empty" do
-      let(:product) {build(:product,status:"")}
-      it "throws an error" do
-        expect(product.errors).to include(:status)
-      end
-    end
-  end
+  
 
   describe "description" do
     before(:each) do 

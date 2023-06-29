@@ -9,7 +9,7 @@ RSpec.describe ProductsController, type: :controller do
 
     let(:renter) {create(:renter)}
     let(:renter_account) {create(:account,:for_renter, accountable: renter)}
-    
+
     let!(:product) {create(:product,user:user)}
 
     describe "get /products#index" do

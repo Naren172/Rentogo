@@ -87,7 +87,7 @@ RSpec.describe Api::ProductsController, type: :request do
 
         context "when renter_account is signed in" do
             before do
-                post "/api/products", params:{product:{name:product.name,rent:product.rent,description:product.description}}
+                post "/api/products", params:{access_token: renter_account_token.token,product:{name:product.name,rent:product.rent,description:product.description}}
             end
             it "returns status 401" do
               expect(response).to have_http_status(401)
@@ -98,8 +98,8 @@ RSpec.describe Api::ProductsController, type: :request do
             before do
                 post "/api/products", params:{access_token: user_account_token.token,product:{name:product.name,rent:product.rent,description:product.description}}
             end
-            it "returns status 422" do
-              expect(response).to have_http_status(422)
+            it "returns status 200" do
+              expect(response).to have_http_status(200)
             end
         end
     end

@@ -1,5 +1,7 @@
 <%= render partial: "shared/navbarrenter" %>
-<center>
+<%
+=begin%>
+ <center>
   <h1>Applications</h1>
   <ul>
     <% @applicants.each do |applicant| %>
@@ -16,4 +18,40 @@
       <br><br>
     <% end %>
   </ul>
-</center>
+</center> 
+<%
+=end%>
+
+
+<div class="container">
+  <% @applicants.each do |applicant| %>
+    <div class="row">
+      <div class="col-md-6" style="top:20%;">
+      <br><br><br><br>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel"> 
+            <center> 
+              <div class="item active">
+                <img src="<%=(url_for(Product.find(applicant.product_id).image))%>" alt="Los Angeles" style="width:50%;height:50%;">
+              </div>
+            </center>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <center><h1 style="font-size: 18px;">AMOUNT:RS <%=Product.find(applicant.product_id).rent%></h1></center>
+        <br>
+        <h1 style="font-size: 18px;">Details</h1>
+        <p><%=Product.find(applicant.product_id).name%></p>
+        <h1><%= applicant.status %><h1  >
+        <h1 style="font-size: 18px; border-style: solid;padding: .3cm;"><%=Product.find(applicant.product_id).description%></h1>
+        <li style="background-color: #FF5733;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><%= link_to "View Product", show_path(applicant.product_id) %></center></li>
+          <li style="background-color: #FF5733;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><%= button_to "Delete", delete_path(applicant) , method: :delete,  style:"border:none; outline:none;background-color: #FF5733;color: black;"%></center></li>
+
+        <br>
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+        <br>
+      </div>
+    </div>
+    
+  <%end%>
+</div>
+
