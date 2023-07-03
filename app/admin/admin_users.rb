@@ -10,6 +10,7 @@ ActiveAdmin.register AdminUser do
     column :created_at
     actions
   end
+  # this is the change
 
   filter :email
   filter :current_sign_in_at
