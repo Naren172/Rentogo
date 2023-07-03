@@ -1,7 +1,7 @@
 class Api::RatingsController < Api::ApiController
     
-    before_action :is_owner?, except: [:createproduct,:productrating]
-    before_action :is_renter?, except: [:createuser,:productrating]
+    before_action :is_owner?, except: [:createproduct,:productrating,:renterrating]
+    before_action :is_renter?, except: [:createuser,:productrating,:renterrating]
 
     def createproduct
         account=current_account
@@ -47,12 +47,27 @@ class Api::RatingsController < Api::ApiController
         if product
             ratings=product.ratings
             if ratings
-                render json: ratings, status: :ok
+                render json: ratings,except: [:created_at, :updated_at], status: :ok
             else
                 render json: {message:"no ratings for the product!"}, status: :not_found
             end
         else
             render json: { message: "No Product Found"}, status: :not_found
+        end
+
+    end
+
+    def renterrating
+        renter=Renter.find_by(id:params[:id])
+        if renter
+            ratings=renter.ratings
+            if ratings
+                render json: ratings, status: :ok
+            else
+                render json: {message:"no ratings for the product!"}, status: :not_found
+            end
+        else
+            render json: { message: "No Renter Found"}, status: :not_found
         end
 
     end

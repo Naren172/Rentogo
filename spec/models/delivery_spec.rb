@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Delivery, type: :model do
-
-   describe 'association' do
-
+  describe 'association' do
     context "belongs_to"  do
       let(:payment_history) {create(:payment_history)}
       let(:delivery) {build(:delivery , payment_history:payment_history)}
@@ -22,7 +20,6 @@ RSpec.describe Delivery, type: :model do
   end
 
   describe "location" do
-
     before(:each) do
       delivery.validate
     end
@@ -47,5 +44,4 @@ RSpec.describe Delivery, type: :model do
       end
     end
   end
-
 end

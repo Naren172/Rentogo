@@ -91,3 +91,5 @@ gem "devise", "~> 4.9"
 
 gem "doorkeeper", "~> 5.6"
 gem 'rails-controller-testing'
+gem 'will_paginate'
+gem 'kaminari'

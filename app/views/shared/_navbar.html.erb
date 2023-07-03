@@ -17,12 +17,13 @@
         <li><a href="http://127.0.0.1:3000/products" style="color: black;">Your Products</a></li>
     
       </ul>
-      <ul class="nav navbar-nav navbar-right" style="padding: 2%;">
+      <ul class="nav navbar-nav navbar-right" style="padding: 2%;"><div class="cart" style="padding-right: 40%;">
        <% if account_signed_in?%>
         <%= button_to destroy_account_session_path,method: :delete  do %>
             <i class="i fa fa-user"></i>
         <%end%>
       <%end%>
+      </div>
       </ul>
     </div>
   </div>

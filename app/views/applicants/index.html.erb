@@ -44,8 +44,7 @@
         <h1><%= applicant.status %><h1  >
         <h1 style="font-size: 18px; border-style: solid;padding: .3cm;"><%=Product.find(applicant.product_id).description%></h1>
         <li style="background-color: #FF5733;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><%= link_to "View Product", show_path(applicant.product_id) %></center></li>
-          <li style="background-color: #FF5733;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><%= button_to "Delete", delete_path(applicant) , method: :delete,  style:"border:none; outline:none;background-color: #FF5733;color: black;"%></center></li>
-
+          <li style="background-color: #FF5733;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><%= button_to "Remove Application", delete_path(applicant) , method: :delete,  style:"border:none; outline:none;background-color: #FF5733;color: black;"%></center></li>
         <br>
         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
         <br>

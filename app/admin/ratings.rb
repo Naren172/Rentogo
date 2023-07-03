@@ -1,4 +1,5 @@
 ActiveAdmin.register Rating do
+  actions :index, :show, :destroy
   index do 
     column :rating
     column :comment

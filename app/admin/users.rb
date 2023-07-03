@@ -8,6 +8,7 @@ ActiveAdmin.register User do
   # permit_params :address
   #
   # or
+  actions :index, :show, :destroy
   index do
     column :id
     column :account

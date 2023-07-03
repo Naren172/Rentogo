@@ -14,7 +14,7 @@ ActiveAdmin.register Renter do
     permitted << :other if params[:action] == 'create' && current_user.admin?
     permitted
   end
-
+  actions :index, :show, :destroy
   index do 
     column :id
     column :account

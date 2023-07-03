@@ -94,6 +94,8 @@ Rails.application.routes.draw do
   get "getallusers", to:"main#getallusers"
   get "getallrenters", to:"main#getallrenters"
   get "productratings/:id", to:"ratings#productrating" ,as:'productratings'
+  get "getrenterratings/:id", to:"ratings#renterrating" ,as:'getrenterratings'
+
   get "landing", to:"main#landing"
 
   resources :products

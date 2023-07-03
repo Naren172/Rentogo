@@ -1,7 +1,9 @@
 <%= render partial: "shared/navbar" %>
 <center>
   <h1>Applicants</h1>
-  <ul>
+  <%
+=begin%>
+ <ul>
     <% @renter.each do |renter| %>
       <div class="card">
         <li>
@@ -12,6 +14,47 @@
         <%= link_to "Reject", reject_path(renterid:renter.id,productid:@product.id) %> <br>
       </div>
     <% end %>
-  </ul>
+  </ul> 
+<%
+=end%>
 
 </center>
+
+<div class="container">
+  <% @renter.each do |renter| %>
+  <%ratings=renter.ratings%>
+  <%if(ratings.length>0)%>
+    <%averagerating=0%>
+    <%n=0%>
+    <%ratings.each do |rating|%>
+      <%averagerating+=rating.rating%>
+      <%n+=1 %>
+    <%end%>
+    <%averagerating/=n%>
+  <%end%>
+    <div class="row">
+      <div class="col-md-6" style="top:20%;">
+      <br><br><br><br>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel"> 
+            <center> 
+              <div class="item active">
+                <img src="https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg" alt="Los Angeles" style="width:50%;height:50%;">
+              </div>
+            </center>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <br>
+        <h1 style="font-size: 18px;">Details</h1>
+        <h3><%=renter.account.name%></h3>
+        <h1>Rating: <%=averagerating%></h1>
+        <li style="background-color: #4BB543;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><%= link_to "Accept", accept_path(renterid:renter.id,productid:@product.id) %></center></li>
+          <li style="background-color: #FF0000;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><%= link_to "Reject", reject_path(renterid:renter.id,productid:@product.id) %></center></li>
+        <br>
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+        <br>
+      </div>
+    </div>
+    
+  <%end%>
+</div>

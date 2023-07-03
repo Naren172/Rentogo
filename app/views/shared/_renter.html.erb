@@ -29,11 +29,13 @@
             </div>
             </div>
         <%end%>
+        <div class="cart" style="padding-right: 40%;">
         <% if account_signed_in?%>
         <%= button_to destroy_account_session_path,method: :delete  do %>
             <i class="i fa fa-user"></i>
         <%end%>
       <%end%>
+      
       </ul>
     </div>
   </div>

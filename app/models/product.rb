@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  paginates_per 2
+
   belongs_to :user
   has_many :applicants, dependent: :destroy
   has_many :rental_histories, dependent: :destroy

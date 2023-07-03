@@ -1,4 +1,5 @@
 ActiveAdmin.register Account do
+  actions :index, :show, :destroy
   index do
     column :id
     column :name
@@ -14,12 +15,6 @@ ActiveAdmin.register Account do
   # permit_params :name, :email, :accountable_type, :accountable_id, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at
   #
   # or
-
-  permit_params do
-    permitted = [:name, :email, :accountable_type, :accountable_id, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at]
-    permitted << :other if params[:action] == 'create' && current_user.admin?
-    permitted
-  end
 
 
   filter :email

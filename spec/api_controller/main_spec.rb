@@ -31,6 +31,7 @@ RSpec.describe Api::MainController, type: :request do
               expect(response).to have_http_status(401)
             end
         end
+        
         context "when user is signed in" do
             before do
                 get "/api/renter", params: {access_token: renter_account_token.token}

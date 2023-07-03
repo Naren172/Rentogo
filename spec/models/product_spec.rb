@@ -13,7 +13,6 @@ RSpec.describe Product, type: :model do
     end
 
     context "has_many" do
-
       [:applicants , :rental_histories , :ratings].each do |each|
         it each.to_s.humanize do
           association = Product.reflect_on_association(each).macro
@@ -21,8 +20,6 @@ RSpec.describe Product, type: :model do
         end
       end
     end
-
-    
   end
 
   describe "callbacks" do
@@ -79,7 +76,7 @@ RSpec.describe Product, type: :model do
       end
     end
 
-     context "when value is alphabetic" do
+    context "when value is alphabetic" do
       let(:product) {build(:product , rent: "abcde")}
       it "throws an error" do
         expect(product.errors).to include(:rent)
@@ -100,18 +97,12 @@ RSpec.describe Product, type: :model do
       end
     end
 
-
-
   end
-
-
   describe "name" do
 
     before(:each) do
       product.validate
     end
-
-
     context "when name is present" do
       let(:product) {build(:product,name:"camera")}
       it "doesn't throw any error" do

@@ -17,7 +17,6 @@
     <% else%>
     Applied
     <%end%>
-   
   <% end %>
   <%end%>
 </ul> 
@@ -26,17 +25,18 @@
 <div class="container">
   <%=form_with url:renter_path,method: :get do |f|%>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4"><br>
         <%=f.number_field :rent ,class:"form-control",placeholder:"Amount less than"%>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4"><br>
         <%=f.number_field :rent1 ,class:"form-control",placeholder:"Amount greater than"%>
       </div>
+      <div class="col-md-3">
         <%=f.submit "Search",style:"background-color: #FF5733;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"%>
+      </div>
     </div>
   <%end%>
 </div>
-
 <div class="container">
   <% @products.each do |product| %>
     <% unless product.unavailable? %>
@@ -65,7 +65,7 @@
             <%end%>
           <%end%>
           <% if n==0%>
-            <li style="background-color: #FF5733;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><%= link_to "Add", apply_path(product.id) %></center></li>
+            <li style="background-color: #FF5733;display: block;  list-style-type: none; color: white; border-style: none; width: 10cm; height: 1cm;margin-top: 0.7cm;"><center><%= link_to "Apply", apply_path(product.id) %></center></li>
           <% else%>
             Applied
           <%end%>
@@ -78,3 +78,4 @@
   <%end%>
 </div>
 
+  <%= paginate @products%>

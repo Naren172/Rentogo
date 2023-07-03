@@ -14,10 +14,12 @@ ActiveAdmin.register RentalHistory do
     permitted << :other if params[:action] == 'create' && current_user.admin?
     permitted
   end
-
+  actions :index, :show, :destroy
   index do
     column :product
-    column :renter
+    column 'Renter' do |model|
+      link_to model.renter.account.name, admin_account_path(model.renter.account.id)
+    end
     actions
   end
   
