@@ -56,15 +56,17 @@ class ApplicantsController < ApplicationController
                 redirect_to owner_path
                 return
             end
-            applicants=Applicant.where(product_id:applicant.product_id)
-            applicants.each do |app|
-                app.status="Rejected"
-                app.save
-            end
-            applicant.status="Accepted" 
-            applicant.save
-            product=Product.find_by(id:applicant.product_id)
-            product.status="Unavailable"
+            MyWorker.perform_async(applicant.id)
+            # applicants=Applicant.where(product_id:applicant.product_id)
+            
+            # applicants.each do |app|
+            #     app.status="Rejected"
+            #     app.save
+            # end
+
+            # applicant.status="Accepted" 
+            # applicant.save
+            # product.status="Unavailable"
             redirect_to add_path(productid:product.id,renterid:params[:renterid])
         else
             redirect_to owner_path
