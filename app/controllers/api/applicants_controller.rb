@@ -34,8 +34,17 @@ class Api::ApplicantsController < Api::ApiController
     def index
         renter=Renter.find(current_account.accountable_id)        
         applicants=Applicant.where(renter_id:renter.id)
+        app=applicants.map do |apply|
+            {
+                id:apply.id,
+                status:apply.status,
+                name:Product.find_by(id:apply.product_id).name,
+                rent:Product.find_by(id:apply.product_id).rent,
+                url:url_for(Product.find_by(id:apply.product_id).image)
+        }
+        end
         if applicants
-            render json: applicants ,status: :ok
+            render json: app ,status: :ok
         else
             render json: { message: "No Applicants Found"} , status: :not_found
         end
@@ -48,11 +57,18 @@ class Api::ApplicantsController < Api::ApiController
             renter=[]
             applicants.each do |applicant|
                 if(applicant.status!="Rejected"&&applicant.status!="Accepted")
-                    renter<<Renter.find_by(id:applicant.renter_id)
+                    renter<<Account.find_by(accountable_id:applicant.renter_id)
                 end
             end
+            rent=renter.map do |rente|
+                {
+                    id:rente.accountable_id,
+                    name:rente.name,
+                    product_id:product.id,
+                }
+            end
             if renter
-                render json: renter ,status: :ok
+                render json: {renter:rent} ,status: :ok
             else            
                 render json: { message: "No Renters Found"} , status: :not_found
             end

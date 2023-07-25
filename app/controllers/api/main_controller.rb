@@ -3,9 +3,21 @@ class Api::MainController <  Api::ApiController
     before_action :is_renter?, except: [:getallrenters,:getallusers,:landing]
     def index
         products=Product.all
-        render json: products , status: :ok
+        product_data = products.map do |product|
+        unless product.unavailable?
+            {
+            
+                id: product.id,
+                name: product.name,
+                rent:product.rent,
+                avatar_url: product.image.attached? ? url_for(product.image) : nil
+            
+            }
+        end
     end
+    render json:{products:product_data}
 
+end
     def show
         product=Product.find_by(id:params[:id])
         if product
@@ -61,9 +73,13 @@ class Api::MainController <  Api::ApiController
     private
     def is_renter?
         unless current_account && current_account.renter?
-            render json: {message: "You are not authorized to view this page"} , status: :unauthorized
+            render json: {message: "You are not authorized to view this page"} 
         end
     end
 
 
 end
+
+
+
+

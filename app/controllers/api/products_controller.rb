@@ -5,7 +5,17 @@ class Api::ProductsController < Api::ApiController
         user=User.find(current_account.accountable_id)
         products=user.products
         if products
-            render json: products , status: :ok
+            product_data = products.map do |product|
+                    {
+                    
+                        id: product.id,
+                        name: product.name,
+                        rent:product.rent,
+                        avatar_url: product.image.attached? ? url_for(product.image) : nil
+                    
+                    }
+            end
+            render json:{products:product_data}
         else
             render json: {message:"No products found"}, status: :not_found
         end
@@ -73,12 +83,14 @@ class Api::ProductsController < Api::ApiController
     end
 
     def product_params
-        params.require(:product).permit(:name,:rent,:status,:image,:description)
+        params.permit(:name,:rent,:status,:image,:description)
     end
 
     private
     def is_owner?
         unless current_account && current_account.user?
+            puts("#############")
+            puts current_account.user?
             render json: {message: "You are not authorized to view this page"} , status: :unauthorized
         end
     end
